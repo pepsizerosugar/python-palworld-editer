@@ -1,0 +1,17 @@
+{
+  "en": {
+    "parameter": "Parameter",
+    "description": "Description",
+    "value": "Value"
+  },
+  "ko": {
+    "parameter": "파라미터",
+    "description": "설명",
+    "value": "값"
+  },
+  "jp": {
+    "parameter": "パラメーター",
+    "description": "説明",
+    "value": "値"
+  }
+}

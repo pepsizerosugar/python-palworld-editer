@@ -3,21 +3,24 @@ import re
 from PyQt5.QtWidgets import QFileDialog
 
 from gui.dialogs.dialogs import show_file
-from gui.messageboxs.message_boxs import if_settings_file_is_not_loaded
+from gui.messageboxs.message_boxs import if_settings_file_is_not_loaded, if_error_when_load_settings_file, \
+    if_error_when_save_settings_file
+from gui.utils.gui_utils import set_table_widget_data, resize_windows
 from utils.translation_utils import load_translations
-
-FILE_PATH = ""
-SAVE_PATH = ""
 
 
 def load_settings_file(self):
-    FILE_PATH = show_file(self)
-    if FILE_PATH:
-        self.options = parse_settings_file(FILE_PATH)
+    file_path = show_file(self)
+    if file_path:
+        self.options = parse_settings_file(file_path)
         self.translations = load_translations("PalWorldSettings.json")
 
         if self.options and self.translations:
-            self.show_settings_ui()
+            if not self.central_widget:
+                self.init_central_widget()
+                set_table_widget_data(self, True)
+            else:
+                set_table_widget_data(self, False)
 
 
 def parse_settings_file(file_path):
@@ -37,18 +40,31 @@ def parse_settings_file(file_path):
             return options
 
     except Exception as e:
-        print(f"Error parsing settings file: {e}")
+        if_error_when_load_settings_file(e)
         return None
 
 
 def save_settings_file(self):
-    if not FILE_PATH:
-        # 사용자가 불러온 설정 파일이 없는 경우 경고 출력
-        if_settings_file_is_not_loaded()
+    # 사용자가 불러온 설정 파일이 없는 경우 경고 출력
+    if not self.options:
+        if_settings_file_is_not_loaded(self)
         return
 
     # 대화 상자를 통해 저장할 위치를 선택
-    SAVE_PATH, _ = QFileDialog.getSaveFileName(self, 'Save Settings File', '', 'INI Files (*.ini);;All Files (*)')
+    save_path, _ = QFileDialog.getSaveFileName(self, 'Save Settings File', '', 'INI Files (*.ini);;All Files (*)')
 
-    if SAVE_PATH:
-        pass
+    if save_path:
+        try:
+            with open(save_path, 'w') as file:
+                file.write("[/Script/Pal.PalGameWorldSettings]\n")
+                file.write("OptionSettings=(")
+
+                for option, value in self.options.items():
+                    if value:
+                        file.write(f"{option}={value},")
+                    else:
+                        value = '""'
+
+                file.write(")")
+        except Exception as e:
+            if_error_when_save_settings_file(e)

@@ -2,6 +2,8 @@ from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QPixmap, QImageReader
 from PyQt5.QtWidgets import QLabel
 
+from gui.messageboxs.message_boxs import if_error_when_load_banner_image
+
 
 class BannerLabel(QLabel):
     def __init__(self, parent=None):
@@ -16,4 +18,4 @@ class BannerLabel(QLabel):
             pixmap = QPixmap(banner_path)
             self.setPixmap(pixmap)
         else:
-            print(f"Error loading banner image: {banner_path}")
+            if_error_when_load_banner_image(e)

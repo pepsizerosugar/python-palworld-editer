@@ -1,6 +1,8 @@
 import json
 import os
 
+from gui.messageboxs.message_boxs import if_error_when_load_translations
+
 
 def load_translations(filename):
     try:
@@ -14,10 +16,14 @@ def load_translations(filename):
         return translations
 
     except Exception as e:
-        print(f"Error loading translations: {e}")
+        if_error_when_load_translations(e)
         return None
 
 
 def convert_translation_list_to_dict(translations):
     # 번역 파일이 리스트일 경우 딕셔너리로 변환하는 함수
     return {entry["parameter"]: entry for entry in translations}
+
+
+def change_translation_code(self, index):
+    self.translation_code = ["ko", "en", "jp"][index]

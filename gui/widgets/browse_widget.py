@@ -1,6 +1,7 @@
 from PyQt5.QtWidgets import QLabel, QComboBox, QPushButton, QVBoxLayout, QHBoxLayout
 
 from utils.file_utils import load_settings_file
+from utils.translation_utils import change_translation_code
 
 
 class BrowseWidget:
@@ -9,7 +10,8 @@ class BrowseWidget:
         self.translation_label.setText("Translation code")
 
         self.translation_combo = QComboBox(parent)
-        self.translation_combo.addItems(["ko", "en"])
+        self.translation_combo.addItems(["ko", "en", "jp"])
+        self.translation_combo.currentIndexChanged.connect(lambda index: change_translation_code(parent, index))
 
         self.load_button = QPushButton(parent)
         self.load_button.setText('Load Settings File')
