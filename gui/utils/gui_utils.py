@@ -3,6 +3,7 @@ from PyQt5.QtGui import QDoubleValidator
 from PyQt5.QtWidgets import QSlider, QLineEdit, QRadioButton, QButtonGroup, QTableWidgetItem, QLabel, \
     QWidget, QHBoxLayout, QDesktopWidget
 
+from gui.dataclass.ui_elements import UIElements
 from utils.translation_utils import convert_translation_list_to_dict
 
 
@@ -13,9 +14,11 @@ def move_center(window):
     window.move(qr.topLeft())
 
 
-def resize_windows(self):
-    self.total_width = sum(self.table_widget.columnWidth(col) for col in range(self.table_widget.columnCount()))
-    self.resize(self.total_width + 65, self.size().height() + 800)
+def resize_windows():
+    UIElements.settings_table_width = sum(UIElements.settings_table_widget.columnWidth(col) for col in
+                                          range(UIElements.settings_table_widget.columnCount()))
+    UIElements.main_window.resize(UIElements.settings_table_width + 65,
+                                  UIElements.main_window.size().height() + 800)
 
 
 def create_widget_for_option(value):

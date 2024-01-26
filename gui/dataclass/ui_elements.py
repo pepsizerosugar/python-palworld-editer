@@ -22,4 +22,3 @@ class UIElements:
     settings_menu_bar_file: None
     settings_table_widget: None
     settings_table_width: None
-

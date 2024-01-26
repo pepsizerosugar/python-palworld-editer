@@ -1,7 +1,6 @@
 from PyQt5.QtWidgets import QLabel, QComboBox, QPushButton, QVBoxLayout, QHBoxLayout, QWidget
 
 from gui.dataclass.ui_elements import UIElements
-from gui.labels.banner_label import BannerLabel
 from utils.file_utils import load_settings_file
 from utils.translation_utils import change_translation_code
 
@@ -18,7 +17,7 @@ class BrowseWidget:
 
         UIElements.browse_load_file_button = QPushButton()
         UIElements.browse_load_file_button.setText('Load Settings File')
-        UIElements.browse_load_file_button.clicked.connect(lambda: load_settings_file(self))
+        UIElements.browse_load_file_button.clicked.connect(lambda: load_settings_file())
 
         UIElements.browse_interaction_layout = QVBoxLayout()
         hbox_layout = QHBoxLayout()

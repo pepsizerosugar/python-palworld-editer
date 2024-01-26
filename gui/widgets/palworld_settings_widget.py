@@ -1,15 +1,10 @@
 from PyQt5.QtWidgets import QVBoxLayout, QWidget, QTableWidget, QAction, QMenuBar
 
 from gui.dataclass.ui_elements import UIElements
-from gui.utils.gui_utils import move_center
-from utils.file_utils import load_settings_file, save_settings_file
 
 
 class PalWorldSettingsWidget:
     def __init__(self):
-        pass
-
-    def init_settings_widget(self):
         # 위젯 생성
         UIElements.settings_central_widget = QWidget()
         UIElements.settings_box_layout = QVBoxLayout(UIElements.settings_central_widget)
@@ -19,17 +14,17 @@ class PalWorldSettingsWidget:
         UIElements.settings_menu_bar_file = UIElements.settings_menu_bar.addMenu('File')
 
         # 메뉴 액션 생성
-        load_action = QAction('Load', self)
+        load_action = QAction('Load')
         load_action.setShortcut('Ctrl+D')
-        load_action.triggered.connect(lambda: load_settings_file(self))
+        # load_action.triggered.connect(lambda: load_settings_file(self))
 
-        save_action = QAction('Save', self)
+        save_action = QAction('Save')
         save_action.setShortcut('Ctrl+S')
-        save_action.triggered.connect(lambda: save_settings_file(self))
+        # save_action.triggered.connect(lambda: save_settings_file(self))
 
-        exit_action = QAction('Exit', self)
+        exit_action = QAction('Exit')
         exit_action.setShortcut('Ctrl+Q')
-        exit_action.triggered.connect(self.close)
+        exit_action.triggered.connect(UIElements.main_window.close)
 
         # 액션 메뉴에 추가
         UIElements.settings_menu_bar_file.addAction(load_action)
