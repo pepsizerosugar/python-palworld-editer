@@ -16,9 +16,13 @@ def move_center():
 
 
 def resize_windows():
-    total_width = sum(UIElements.settings_table_widget.columnWidth(col) for col in
-                      range(UIElements.settings_table_widget.columnCount())) + 65
-    self.resize(total_width, self.size().height() + 800)
+    # qtmodern을 사용할 경우에는 resize가 불가함
+    widget = UIElements.settings_table_widget
+    main_window = UIElements.main_window
+    central_widget = UIElements.settings_central_widget
+    total_width = sum(widget.columnWidth(col) for col in
+                      range(widget.columnCount())) + 65
+    main_window.resize(total_width, main_window.size().height() + 800)
 
 
 def create_widget_for_option(value):

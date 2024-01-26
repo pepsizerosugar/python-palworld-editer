@@ -1,4 +1,4 @@
-from PyQt5.QtWidgets import QLabel, QComboBox, QPushButton, QVBoxLayout, QHBoxLayout, QWidget
+from PyQt5.QtWidgets import QLabel, QComboBox, QPushButton, QVBoxLayout, QHBoxLayout, QWidget, QStatusBar
 
 from gui.dataclass.ui_elements import UIElements
 from utils.file_utils import load_settings_file

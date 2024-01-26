@@ -13,6 +13,6 @@ class InitializeUI:
         UIElements.main_window.setGeometry(300, 300, 460, 230)
         UIElements.main_window.setWindowTitle('PalWorld Advanced Server Settings Helper')
 
-        BannerLabel.__init__(self)
-        BrowseWidget().__init__()
+        BannerLabel()
+        BrowseWidget()
         move_center()

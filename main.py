@@ -27,7 +27,7 @@ if __name__ == '__main__':
     qtmodern.styles.dark(app)
 
     window = MainClass()
-    mw = qtmodern.windows.ModernWindow(window)
-    mw.show()
+    # mw = qtmodern.windows.ModernWindow(window)
+    window.show()
 
     sys.exit(app.exec_())
