@@ -1,19 +1,21 @@
 from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QDoubleValidator
-from PyQt5.QtWidgets import QApplication, QSlider, QLineEdit, QRadioButton, QButtonGroup, QTableWidgetItem, QLabel, \
-    QWidget, QHBoxLayout
+from PyQt5.QtWidgets import QSlider, QLineEdit, QRadioButton, QButtonGroup, QTableWidgetItem, QLabel, \
+    QWidget, QHBoxLayout, QDesktopWidget
 
 from utils.translation_utils import convert_translation_list_to_dict
 
 
-def center_on_screen(widget):
-    # 현재 스크린의 중앙 좌표를 구함
-    screen_rect = QApplication.desktop().screenGeometry()
-    x = (screen_rect.width() - widget.width()) // 2
-    y = (screen_rect.height() - widget.height()) // 2
+def move_center(window):
+    qr = window.frameGeometry()
+    cp = QDesktopWidget().availableGeometry().center()
+    qr.moveCenter(cp)
+    window.move(qr.topLeft())
 
-    # 위젯을 중앙 좌표로 이동
-    widget.move(x, y)
+
+def resize_windows(self):
+    self.total_width = sum(self.table_widget.columnWidth(col) for col in range(self.table_widget.columnCount()))
+    self.resize(self.total_width + 65, self.size().height() + 800)
 
 
 def create_widget_for_option(value):
@@ -70,11 +72,6 @@ def create_widget_for_option(value):
         return value_line_edit
 
 
-def resize_windows(self):
-    self.total_width = sum(self.table_widget.columnWidth(col) for col in range(self.table_widget.columnCount()))
-    self.resize(self.total_width + 65, self.size().height() + 800)
-
-
 def set_table_widget_data(self, is_first_load):
     self.options.pop("OptionSettings")
     self.translations = convert_translation_list_to_dict(self.translations)
@@ -86,29 +83,38 @@ def set_table_widget_data(self, is_first_load):
             add_row_to_table(self, option, widgets)
     else:
         # 이후 파일 로드 시는 기존 테이블 데이터 갱신
-        # 갱신 기준은 설정 항목
+        # 갱신 기준은 설정 항목이 있는 경우만, 없으면 해당 설정 항목 삭제
         for row in range(self.table_widget.rowCount()):
             # 기존 설정 항목 가져오기
             exist_option = self.table_widget.item(row, 0).text()
 
             # 기존 설정 항목이 새로 불러온 설정 항목에도 존재하는 경우
             if exist_option in self.options:
-                # 기존 설정 항목의 아이템을 가져온다
+                # 기존 설정 항목의 설정 값 아이템을 가져온다
                 # TODO: item과 widget의 조건에 따라 처리 필요:wq
                 exist_item = self.table_widget.item(row, 2)
                 if exist_item:
-                    pass
+                    # 어떤 아이템 타입인지 확인
+                    if isinstance(exist_item, QTableWidgetItem):
+                        print(type(exist_item), exist_option, self.options[exist_option], exist_item.text())
+                        pass
+                    else:
+                        print(type(exist_item), exist_option, self.options[exist_option], exist_item.text())
+                        pass
                 else:
-                    exist_item = self.table_widget.cellWidget(row, 2)
+                    exist_widget = self.table_widget.cellWidget(row, 2)
+                    print(type(exist_widget), exist_option, self.options[exist_option], exist_widget)
                     pass
             else:
                 # 기존 설정 항목이 새로 불러온 설정 항목에는 존재하지 않는 경우
                 # 기존 설정 항목을 테이블에서 삭제
+                print("delete", exist_option)
                 self.table_widget.removeRow(row)
 
     self.table_widget.resizeColumnsToContents()
-    resize_windows(self)
-    center_on_screen(self)
+    if is_first_load:
+        resize_windows(self)
+        move_center(self)
 
 
 def create_table_cell_widget(widgets):

@@ -1,56 +1,22 @@
-from PyQt5.QtWidgets import QMainWindow, QVBoxLayout, QWidget, QTableWidget, QAction
+from PyQt5.QtWidgets import QVBoxLayout, QWidget, QTableWidget, QAction, QMenuBar
 
-from gui.labels.banner_label import BannerLabel
-from gui.utils.gui_utils import center_on_screen, resize_windows
-from gui.widgets.browse_widget import BrowseWidget
+from gui.dataclass.ui_elements import UIElements
+from gui.utils.gui_utils import move_center
 from utils.file_utils import load_settings_file, save_settings_file
 
 
-class PalWorldSettingsWidget(QMainWindow):
+class PalWorldSettingsWidget:
     def __init__(self):
-        super().__init__()
+        pass
 
-        # UI 초기화
-        self.translation_code = "ko"
-        self.central_widget = None
-        self.options = None
-        self.translations = None
-        self.table_widget = None
-        self.total_width = None
-        self.init_ui()
-
-    def init_ui(self):
-        # 이미지 배너 삽입
-        banner_label = BannerLabel(self)
-
-        # 번역 코드 표시 라벨, 번역 코드 선택 콤보 박스, 설정 파일 불러오기 버튼
-        browse_widgets = BrowseWidget(self)
-
-        # UI 레이아웃 설정
-        layout = QVBoxLayout()
-        layout.addWidget(banner_label)
-        layout.addSpacing(10)  # 간격 추가
-        layout.addLayout(browse_widgets.get_layout())
-
-        # 브라우저의 Central Widget 설정
-        central_widget = QWidget()
-        central_widget.setLayout(layout)
-        self.setCentralWidget(central_widget)
-
-        # 창 설정
-        self.setGeometry(300, 300, 460, 230)
-        self.setWindowTitle('PalWorld Settings GUI')
-        self.show()
-        center_on_screen(self)
-
-    def init_central_widget(self):
+    def init_settings_widget(self):
         # 위젯 생성
-        self.central_widget = QWidget()
-        layout = QVBoxLayout(self.central_widget)
+        UIElements.settings_central_widget = QWidget()
+        UIElements.settings_box_layout = QVBoxLayout(UIElements.settings_central_widget)
 
         # 메뉴 바 생성
-        menubar = self.menuBar()
-        file_menu = menubar.addMenu('File')
+        UIElements.settings_menu_bar = QMenuBar()
+        UIElements.settings_menu_bar_file = UIElements.settings_menu_bar.addMenu('File')
 
         # 메뉴 액션 생성
         load_action = QAction('Load', self)
@@ -66,18 +32,18 @@ class PalWorldSettingsWidget(QMainWindow):
         exit_action.triggered.connect(self.close)
 
         # 액션 메뉴에 추가
-        file_menu.addAction(load_action)
-        file_menu.addAction(save_action)
-        file_menu.addAction(exit_action)
+        UIElements.settings_menu_bar_file.addAction(load_action)
+        UIElements.settings_menu_bar_file.addAction(save_action)
+        UIElements.settings_menu_bar_file.addAction(exit_action)
 
         # 메뉴 바를 레이아웃에 추가
-        layout.setMenuBar(menubar)
+        UIElements.settings_box_layout.setMenuBar(UIElements.settings_menu_bar)
 
         # 테이블 위젯 생성
-        self.table_widget = QTableWidget()
-        self.table_widget.setColumnCount(3)
-        self.table_widget.setHorizontalHeaderLabels(["설정 항목", "번역", "설정 UI"])
+        UIElements.settings_table_widget = QTableWidget()
+        UIElements.settings_table_widget.setColumnCount(3)
+        UIElements.settings_table_widget.setHorizontalHeaderLabels(["설정 항목", "번역", "설정 UI"])
 
         # 테이블 위젯을 레이아웃에 추가
-        layout.addWidget(self.table_widget)
-        self.setCentralWidget(self.central_widget)
+        UIElements.settings_box_layout.addWidget(UIElements.settings_table_widget)
+        UIElements.main_window.setCentralWidget(UIElements.settings_central_widget)

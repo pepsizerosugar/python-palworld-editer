@@ -2,22 +2,24 @@ import re
 
 from PyQt5.QtWidgets import QFileDialog
 
+from gui.dataclass.data_elements import DataElements
+from gui.dataclass.ui_elements import UIElements
 from gui.dialogs.dialogs import show_file
 from gui.messageboxs.message_boxs import if_settings_file_is_not_loaded, if_error_when_load_settings_file, \
     if_error_when_save_settings_file
-from gui.utils.gui_utils import set_table_widget_data, resize_windows
+from gui.utils.gui_utils import set_table_widget_data
 from utils.translation_utils import load_translations
 
 
 def load_settings_file(self):
     file_path = show_file(self)
     if file_path:
-        self.options = parse_settings_file(file_path)
-        self.translations = load_translations("PalWorldSettings.json")
+        DataElements.palworld_options = parse_settings_file(file_path)
+        DataElements.options_translations = load_translations("PalWorldSettings.json")
 
-        if self.options and self.translations:
-            if not self.central_widget:
-                self.init_central_widget()
+        if DataElements.palworld_options and DataElements.options_translations:
+            if not UIElements.settings_central_widget:
+                self.init_settings_widget()
                 set_table_widget_data(self, True)
             else:
                 set_table_widget_data(self, False)
