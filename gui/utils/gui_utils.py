@@ -16,11 +16,11 @@ def move_center(window):
 
 
 def resize_windows():
-    # 테이블 크기에 맞추어 창 크기 조절
-    total_width = 50
+    total_width = 65
     for column in range(UIElements.settings_table_widget.columnCount()):
         total_width += UIElements.settings_table_widget.columnWidth(column)
-    UIElements.settings_window.resize(total_width, UIElements.browse_window.size().height() + 800)
+    total_height = QDesktopWidget().availableGeometry().height() * 0.8
+    UIElements.settings_window.resize(total_width, int(total_height))
 
 
 def create_widget_for_option(value):
@@ -121,19 +121,6 @@ def set_table_widget_data():
     UIElements.settings_table_widget.resizeColumnsToContents()
 
 
-def create_table_cell_widget(widgets):
-    if isinstance(widgets, tuple):
-        widget_container = QWidget()
-        h_layout = QHBoxLayout(widget_container)
-
-        for widget in widgets:
-            h_layout.addWidget(widget)
-
-        return widget_container
-    else:
-        return QTableWidgetItem(str(widgets.text()))
-
-
 def add_row_to_table(option, widgets):
     # 테이블에 행 추가
     row_position = UIElements.settings_table_widget.rowCount()
@@ -157,3 +144,16 @@ def add_row_to_table(option, widgets):
         UIElements.settings_table_widget.setItem(row_position, 2, cell_item)
 
     UIElements.settings_table_widget.setRowHeight(row_position, 35)
+
+
+def create_table_cell_widget(widgets):
+    if isinstance(widgets, tuple):
+        widget_container = QWidget()
+        h_layout = QHBoxLayout(widget_container)
+
+        for widget in widgets:
+            h_layout.addWidget(widget)
+
+        return widget_container
+    else:
+        return QTableWidgetItem(str(widgets.text()))

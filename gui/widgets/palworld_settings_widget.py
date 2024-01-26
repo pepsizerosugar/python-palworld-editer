@@ -3,7 +3,6 @@ import qtmodern.windows
 from PyQt5.QtWidgets import QVBoxLayout, QWidget, QTableWidget, QAction, QMenuBar, QMainWindow
 
 from gui.dataclass.ui_elements import UIElements
-from gui.utils.gui_utils import resize_windows
 
 
 class PalWorldSettingsWidget:
@@ -47,6 +46,5 @@ class PalWorldSettingsWidget:
         UIElements.settings_box_layout.addWidget(UIElements.settings_table_widget)
         UIElements.settings_window.setCentralWidget(UIElements.settings_central_widget)
 
-        resize_windows()
         UIElements.settings_window = qtmodern.windows.ModernWindow(UIElements.settings_window)
         UIElements.settings_window.show()

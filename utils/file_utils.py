@@ -21,8 +21,8 @@ def load_settings_file():
         if DataElements.is_first_load:
             UIElements.browse_window.close()
             UIElements.settings_central_widget = PalWorldSettingsWidget()
-            # 테이블에 데이터 추가
             set_table_widget_data()
+            resize_windows()
             move_center(UIElements.settings_window)
         else:
             # 설정 위젯이 이미 생성된 경우 설정 위젯의 테이블 위젯 데이터만 갱신
@@ -53,7 +53,7 @@ def parse_settings_file(file_path):
 def save_settings_file(self):
     # 사용자가 불러온 설정 파일이 없는 경우 경고 출력
     if not self.options:
-        if_settings_file_is_not_loaded(self)
+        if_settings_file_is_not_loaded()
         return
 
     # 대화 상자를 통해 저장할 위치를 선택
