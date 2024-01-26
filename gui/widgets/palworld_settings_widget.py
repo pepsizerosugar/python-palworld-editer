@@ -1,6 +1,6 @@
 import qtmodern.styles
 import qtmodern.windows
-from PyQt5.QtWidgets import QVBoxLayout, QWidget, QTableWidget, QAction, QMenuBar, QMainWindow
+from PyQt5.QtWidgets import QVBoxLayout, QWidget, QTableWidget, QMainWindow
 
 from gui.dataclass.ui_elements import UIElements
 
@@ -13,29 +13,26 @@ class PalWorldSettingsWidget:
         UIElements.settings_box_layout = QVBoxLayout(UIElements.settings_central_widget)
 
         # 메뉴 바 생성
-        UIElements.settings_menu_bar = QMenuBar()
+        UIElements.settings_menu_bar = UIElements.settings_window.menuBar()
+        UIElements.settings_menu_bar.setNativeMenuBar(False)
+        UIElements.settings_menu_bar.addSeparator()
         UIElements.settings_menu_bar_file = UIElements.settings_menu_bar.addMenu('File')
 
         # 메뉴 액션 생성
-        load_action = QAction('Load')
-        load_action.setShortcut('Ctrl+D')
-        # load_action.triggered.connect(lambda: load_settings_file(self))
+        load_action = UIElements.settings_menu_bar_file.addAction('Load')
+        save_action = UIElements.settings_menu_bar_file.addAction('Save')
+        save_as_action = UIElements.settings_menu_bar_file.addAction('Save As')
+        exit_action = UIElements.settings_menu_bar_file.addAction('Exit')
 
-        save_action = QAction('Save')
         save_action.setShortcut('Ctrl+S')
-        # save_action.triggered.connect(lambda: save_settings_file(self))
-
-        exit_action = QAction('Exit')
+        load_action.setShortcut('Ctrl+D')
+        save_as_action.setShortcut('Ctrl+Shift+A')
         exit_action.setShortcut('Ctrl+Q')
-        exit_action.triggered.connect(UIElements.browse_window.close)
 
-        # 액션 메뉴에 추가
-        UIElements.settings_menu_bar_file.addAction(load_action)
-        UIElements.settings_menu_bar_file.addAction(save_action)
-        UIElements.settings_menu_bar_file.addAction(exit_action)
-
-        # 메뉴 바를 레이아웃에 추가
-        UIElements.settings_box_layout.setMenuBar(UIElements.settings_menu_bar)
+        # load_action.triggered.connect(lambda: load_settings_file())
+        # save_action.triggered.connect(lambda: save_settings_file(self))
+        # save_as_action.triggered.connect(lambda: save_settings_file(self))
+        exit_action.triggered.connect(UIElements.settings_window.close)
 
         # 테이블 위젯 생성
         UIElements.settings_table_widget = QTableWidget()
