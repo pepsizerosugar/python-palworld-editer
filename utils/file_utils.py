@@ -19,11 +19,11 @@ def load_settings_file():
         DataElements.options_translations = load_translations("PalWorldSettings.json")
         # 첫 설정 파일을 불러오는 경우 설정 위젯 생성
         if DataElements.is_first_load:
+            UIElements.browse_window.close()
             UIElements.settings_central_widget = PalWorldSettingsWidget()
             # 테이블에 데이터 추가
             set_table_widget_data()
-            resize_windows()
-            move_center()
+            move_center(UIElements.settings_window)
         else:
             # 설정 위젯이 이미 생성된 경우 설정 위젯의 테이블 위젯 데이터만 갱신
             pass

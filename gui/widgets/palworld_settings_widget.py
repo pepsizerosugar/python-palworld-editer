@@ -1,10 +1,14 @@
-from PyQt5.QtWidgets import QVBoxLayout, QWidget, QTableWidget, QAction, QMenuBar
+import qtmodern.styles
+import qtmodern.windows
+from PyQt5.QtWidgets import QVBoxLayout, QWidget, QTableWidget, QAction, QMenuBar, QMainWindow
 
 from gui.dataclass.ui_elements import UIElements
+from gui.utils.gui_utils import resize_windows
 
 
 class PalWorldSettingsWidget:
     def __init__(self):
+        UIElements.settings_window = QMainWindow()
         # 위젯 생성
         UIElements.settings_central_widget = QWidget()
         UIElements.settings_box_layout = QVBoxLayout(UIElements.settings_central_widget)
@@ -24,7 +28,7 @@ class PalWorldSettingsWidget:
 
         exit_action = QAction('Exit')
         exit_action.setShortcut('Ctrl+Q')
-        exit_action.triggered.connect(UIElements.main_window.close)
+        exit_action.triggered.connect(UIElements.browse_window.close)
 
         # 액션 메뉴에 추가
         UIElements.settings_menu_bar_file.addAction(load_action)
@@ -41,4 +45,8 @@ class PalWorldSettingsWidget:
 
         # 테이블 위젯을 레이아웃에 추가
         UIElements.settings_box_layout.addWidget(UIElements.settings_table_widget)
-        UIElements.main_window.setCentralWidget(UIElements.settings_central_widget)
+        UIElements.settings_window.setCentralWidget(UIElements.settings_central_widget)
+
+        resize_windows()
+        UIElements.settings_window = qtmodern.windows.ModernWindow(UIElements.settings_window)
+        UIElements.settings_window.show()

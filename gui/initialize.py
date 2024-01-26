@@ -10,9 +10,9 @@ class InitializeUI:
         DataElements.translation_code = "ko"
         DataElements.is_first_load = True
 
-        UIElements.main_window.setGeometry(300, 300, 460, 230)
-        UIElements.main_window.setWindowTitle('PalWorld Advanced Server Settings Helper')
+        UIElements.browse_window.setGeometry(300, 300, 460, 230)
+        UIElements.browse_window.setWindowTitle('PalWorld Advanced Server Settings Helper')
 
         BannerLabel()
         BrowseWidget()
-        move_center()
+        move_center(UIElements.browse_window)

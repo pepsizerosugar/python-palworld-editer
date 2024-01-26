@@ -14,7 +14,7 @@ from gui.initialize import InitializeUI
 class MainClass(QMainWindow):
     def __init__(self):
         super().__init__()
-        UIElements.main_window = self
+        UIElements.browse_window = self
         InitializeUI.__init__(self)
 
 
@@ -27,7 +27,7 @@ if __name__ == '__main__':
     qtmodern.styles.dark(app)
 
     window = MainClass()
-    # mw = qtmodern.windows.ModernWindow(window)
-    window.show()
+    mw = qtmodern.windows.ModernWindow(window)
+    mw.show()
 
     sys.exit(app.exec_())

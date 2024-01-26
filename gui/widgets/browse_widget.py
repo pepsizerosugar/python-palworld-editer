@@ -33,4 +33,4 @@ class BrowseWidget:
 
         UIElements.browse_central_widget = QWidget()
         UIElements.browse_central_widget.setLayout(UIElements.browse_box_layout)
-        UIElements.main_window.setCentralWidget(UIElements.browse_central_widget)
+        UIElements.browse_window.setCentralWidget(UIElements.browse_central_widget)

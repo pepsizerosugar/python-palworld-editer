@@ -8,21 +8,19 @@ from gui.dataclass.ui_elements import UIElements
 from utils.translation_utils import convert_translation_list_to_dict
 
 
-def move_center():
-    qr = UIElements.main_window.frameGeometry()
+def move_center(window):
+    qr = window.frameGeometry()
     cp = QDesktopWidget().availableGeometry().center()
     qr.moveCenter(cp)
-    UIElements.main_window.move(qr.topLeft())
+    window.move(qr.topLeft())
 
 
 def resize_windows():
-    # qtmodern을 사용할 경우에는 resize가 불가함
-    widget = UIElements.settings_table_widget
-    main_window = UIElements.main_window
-    central_widget = UIElements.settings_central_widget
-    total_width = sum(widget.columnWidth(col) for col in
-                      range(widget.columnCount())) + 65
-    main_window.resize(total_width, main_window.size().height() + 800)
+    # 테이블 크기에 맞추어 창 크기 조절
+    total_width = 50
+    for column in range(UIElements.settings_table_widget.columnCount()):
+        total_width += UIElements.settings_table_widget.columnWidth(column)
+    UIElements.settings_window.resize(total_width, UIElements.browse_window.size().height() + 800)
 
 
 def create_widget_for_option(value):
