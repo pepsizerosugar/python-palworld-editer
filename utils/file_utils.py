@@ -7,7 +7,7 @@ from gui.dataclass.ui_elements import UIElements
 from gui.dialogs.dialogs import show_file
 from gui.messageboxs.message_boxs import if_settings_file_is_not_loaded, if_error_when_load_settings_file, \
     if_error_when_save_settings_file
-from gui.utils.gui_utils import resize_windows
+from gui.utils.gui_utils import resize_windows, set_table_widget_data, move_center
 from gui.widgets.palworld_settings_widget import PalWorldSettingsWidget
 from utils.translation_utils import load_translations
 
@@ -20,7 +20,10 @@ def load_settings_file():
         # 첫 설정 파일을 불러오는 경우 설정 위젯 생성
         if DataElements.is_first_load:
             UIElements.settings_central_widget = PalWorldSettingsWidget()
+            # 테이블에 데이터 추가
+            set_table_widget_data()
             resize_windows()
+            move_center()
         else:
             # 설정 위젯이 이미 생성된 경우 설정 위젯의 테이블 위젯 데이터만 갱신
             pass

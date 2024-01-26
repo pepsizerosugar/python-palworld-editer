@@ -21,4 +21,6 @@ class UIElements:
     settings_menu_bar: None
     settings_menu_bar_file: None
     settings_table_widget: None
-    settings_table_width: None
+
+    # settings value widget elements
+    settings_value_widget: None
