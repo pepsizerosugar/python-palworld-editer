@@ -1,32 +1,53 @@
+import os
 import re
 
-from PyQt5.QtWidgets import QFileDialog
+import qtmodern.windows
 
 from gui.dataclass.data_elements import DataElements
 from gui.dataclass.ui_elements import UIElements
-from gui.dialogs.dialogs import show_file
+from gui.dialogs.dialogs import dialog_for_load_settings_file, dialog_for_save_settings_file
 from gui.messageboxs.message_boxs import if_settings_file_is_not_loaded, if_error_when_load_settings_file, \
-    if_error_when_save_settings_file
-from gui.utils.gui_utils import resize_windows, set_table_widget_data, move_center
-from gui.widgets.palworld_settings_widget import PalWorldSettingsWidget
+    if_error_when_save_settings_file, if_save_settings_file_success, if_error_when_save_settings_elements_is_none, \
+    if_load_settins_file_is_finished, if_error_when_load_special_options_file
+from gui.utils.gui_utils import resize_windows, set_table_widget_data, move_center, load_settings_from_table
 from utils.translation_utils import load_translations
 
 
-def load_settings_file():
-    file_path = show_file()
-    if file_path:
-        DataElements.palworld_options = parse_settings_file(file_path)
+def load_special_options_file():
+    try:
+        DataElements.special_palworld_options = {}
+        DataElements.special_settings_file_path = os.path.join(os.path.dirname(__file__), "..", "resources",
+                                                               "special_options.json")
+        try:
+            # open with json format
+            with open(DataElements.special_settings_file_path, 'r') as file:
+                DataElements.special_palworld_options = file.read()
+        except FileExistsError:
+            pass
+    except Exception as e:
+        if_error_when_load_special_options_file(e)
+
+
+def load_settings_file(window):
+    load_special_options_file()
+    DataElements.settings_file_path = dialog_for_load_settings_file(window)
+    if DataElements.settings_file_path:
+        DataElements.palworld_options = parse_settings_file(DataElements.settings_file_path)
         DataElements.options_translations = load_translations("PalWorldSettings.json")
         # 첫 설정 파일을 불러오는 경우 설정 위젯 생성
         if DataElements.is_first_load:
+            UIElements.settings_window.setDisabled(False)
+            UIElements.settings_window = qtmodern.windows.ModernWindow(UIElements.settings_window)
+            UIElements.settings_window.show()
             UIElements.browse_window.close()
-            UIElements.settings_central_widget = PalWorldSettingsWidget()
             set_table_widget_data()
             resize_windows()
             move_center(UIElements.settings_window)
+            DataElements.is_first_load = False
+            if_load_settins_file_is_finished()
         else:
             # 설정 위젯이 이미 생성된 경우 설정 위젯의 테이블 위젯 데이터만 갱신
-            pass
+            set_table_widget_data()
 
 
 def parse_settings_file(file_path):
@@ -41,7 +62,14 @@ def parse_settings_file(file_path):
 
             for match in matches:
                 option, value = match
-                options[option] = float(value) if '.' in value else value
+                if '.' in value:
+                    value = float(value)
+                elif value.isdigit():
+                    value = int(value)
+                else:
+                    value = str(value)
+
+                options.update({option: value})
 
             return options
 
@@ -50,27 +78,50 @@ def parse_settings_file(file_path):
         return None
 
 
-def save_settings_file(self):
-    # 사용자가 불러온 설정 파일이 없는 경우 경고 출력
-    if not self.options:
-        if_settings_file_is_not_loaded()
-        return
+def save_settings_file():
+    check_is_settings_loaded()
 
-    # 대화 상자를 통해 저장할 위치를 선택
-    save_path, _ = QFileDialog.getSaveFileName(self, 'Save Settings File', '', 'INI Files (*.ini);;All Files (*)')
+    # 저장할 파일은 기존 파일과 동일한 위치 및 이름으로 저장
+    save_path = DataElements.settings_file_path
 
     if save_path:
-        try:
+        save_file(save_path)
+
+
+def save_as_settings_file():
+    check_is_settings_loaded()
+
+    # 대화 상자를 통해 저장할 위치를 선택
+    save_path = dialog_for_save_settings_file(UIElements.settings_window)
+
+    if save_path:
+        save_file(save_path)
+
+
+def check_is_settings_loaded():
+    if not DataElements.palworld_options:
+        if_settings_file_is_not_loaded()
+        return False
+    else:
+        return True
+
+
+def save_file(save_path):
+    try:
+        DataElements.palworld_options_to_save = load_settings_from_table()
+        if DataElements.palworld_options_to_save:
             with open(save_path, 'w') as file:
                 file.write("[/Script/Pal.PalGameWorldSettings]\n")
                 file.write("OptionSettings=(")
 
-                for option, value in self.options.items():
+                for option, value in DataElements.palworld_options_to_save.items():
                     if value:
                         file.write(f"{option}={value},")
                     else:
-                        value = '""'
-
+                        file.write(f"{option}="",")
                 file.write(")")
-        except Exception as e:
-            if_error_when_save_settings_file(e)
+            if_save_settings_file_success()
+        else:
+            if_error_when_save_settings_elements_is_none()
+    except Exception as e:
+        if_error_when_save_settings_file(e)

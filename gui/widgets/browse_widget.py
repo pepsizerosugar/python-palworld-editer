@@ -17,7 +17,7 @@ class BrowseWidget:
 
         UIElements.browse_load_file_button = QPushButton()
         UIElements.browse_load_file_button.setText('Load Settings File')
-        UIElements.browse_load_file_button.clicked.connect(lambda: load_settings_file())
+        UIElements.browse_load_file_button.clicked.connect(lambda: load_settings_file(UIElements.browse_window))
 
         UIElements.browse_interaction_layout = QVBoxLayout()
         hbox_layout = QHBoxLayout()

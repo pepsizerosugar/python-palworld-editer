@@ -3,6 +3,7 @@ from gui.dataclass.ui_elements import UIElements
 from gui.labels.banner_label import BannerLabel
 from gui.utils.gui_utils import move_center
 from gui.widgets.browse_widget import BrowseWidget
+from gui.widgets.palworld_settings_widget import PalWorldSettingsWidget
 
 
 class InitializeUI:
@@ -15,4 +16,5 @@ class InitializeUI:
 
         BannerLabel()
         BrowseWidget()
+        UIElements.settings_window = PalWorldSettingsWidget()
         move_center(UIElements.browse_window)
