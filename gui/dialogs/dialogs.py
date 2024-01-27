@@ -1,7 +1,5 @@
 from PyQt5.QtWidgets import QFileDialog
 
-from gui.dataclass.ui_elements import UIElements
-
 
 def dialog_for_load_settings_file(window):
     options = QFileDialog.Options()

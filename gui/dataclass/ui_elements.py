@@ -20,3 +20,5 @@ class UIElements:
     settings_menu_bar: None
     settings_menu_bar_file: None
     settings_table_widget: None
+
+    is_from_update_line_edit: bool = False

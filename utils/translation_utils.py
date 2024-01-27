@@ -1,20 +1,17 @@
 import json
-import os
 
 from gui.dataclass.data_elements import DataElements
 from gui.messageboxs.message_boxs import if_error_when_load_translations
 
 
 def change_translation_code(index):
-    DataElements.translation_code = ["ko", "en", "jp"][index]
+    DataElements.translation_code = DataElements.translation_code_list[index]
 
 
 def load_translations(filename):
     try:
         # 번역 파일이 resources/ 폴더에 있다고 가정
-        resources_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'resources')
-        translation_file_path = os.path.join(resources_path, filename)
-
+        translation_file_path = f"resources/{filename}"
         with open(translation_file_path, 'r', encoding='utf-8') as file:
             translations = json.load(file)
 

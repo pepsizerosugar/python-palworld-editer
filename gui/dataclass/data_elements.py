@@ -12,3 +12,5 @@ class DataElements:
     palworld_options_to_save: None
     options_translations: None
     input_value: None
+    menu_translations: None
+    translation_code_list: None

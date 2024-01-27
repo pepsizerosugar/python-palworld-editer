@@ -1,4 +1,4 @@
-import os
+import json
 import re
 
 import qtmodern.windows
@@ -8,7 +8,7 @@ from gui.dataclass.ui_elements import UIElements
 from gui.dialogs.dialogs import dialog_for_load_settings_file, dialog_for_save_settings_file
 from gui.messageboxs.message_boxs import if_settings_file_is_not_loaded, if_error_when_load_settings_file, \
     if_error_when_save_settings_file, if_save_settings_file_success, if_error_when_save_settings_elements_is_none, \
-    if_load_settins_file_is_finished, if_error_when_load_special_options_file
+    if_load_settins_file_is_finished, if_error_when_load_special_options_file, if_error_when_load_menu_translation
 from gui.utils.gui_utils import resize_windows, set_table_widget_data, move_center, load_settings_from_table
 from utils.translation_utils import load_translations
 
@@ -16,12 +16,10 @@ from utils.translation_utils import load_translations
 def load_special_options_file():
     try:
         DataElements.special_palworld_options = {}
-        DataElements.special_settings_file_path = os.path.join(os.path.dirname(__file__), "..", "resources",
-                                                               "special_options.json")
+        DataElements.special_settings_file_path = "resources/special_options.json"
         try:
-            # open with json format
-            with open(DataElements.special_settings_file_path, 'r') as file:
-                DataElements.special_palworld_options = file.read()
+            with open(DataElements.special_settings_file_path, 'r', encoding='utf-8') as file:
+                DataElements.special_palworld_options = json.loads(file.read())
         except FileExistsError:
             pass
     except Exception as e:
@@ -76,6 +74,20 @@ def parse_settings_file(file_path):
     except Exception as e:
         if_error_when_load_settings_file(e)
         return None
+
+
+def load_menu_translation():
+    try:
+        DataElements.menu_translations = {}
+        DataElements.translation_code_list = []
+        try:
+            with open("resources/menu.json", 'r', encoding='utf-8') as file:
+                DataElements.menu_translations = json.loads(file.read())
+                DataElements.translation_code_list = list(DataElements.menu_translations["translation_code"])
+        except FileExistsError:
+            pass
+    except Exception as e:
+        if_error_when_load_menu_translation(e)
 
 
 def save_settings_file():

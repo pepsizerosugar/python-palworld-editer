@@ -1,5 +1,4 @@
 from PyQt5.QtCore import Qt
-from PyQt5.QtGui import QDoubleValidator
 from PyQt5.QtWidgets import QSlider, QLineEdit, QRadioButton, QButtonGroup, QTableWidgetItem, QLabel, \
     QWidget, QHBoxLayout, QDesktopWidget
 
@@ -24,12 +23,20 @@ def resize_windows():
     UIElements.settings_window.resize(total_width, int(total_height))
 
 
+def set_table_header_with_translation():
+    header = DataElements.menu_translations.get(
+        "default" if DataElements.translation_code == "en" else DataElements.translation_code)
+    UIElements.settings_table_widget.setHorizontalHeaderLabels(
+        [header.get("parameter"), header.get("description"), header.get("value")])
+
+
 def set_table_widget_data():
     DataElements.palworld_options.pop("OptionSettings")
     DataElements.options_translations = convert_translation_list_to_dict(DataElements.options_translations)
 
     # 첫 파일 로드 시는 데이터 삽입
     if DataElements.is_first_load:
+        set_table_header_with_translation()
         for option, value in DataElements.palworld_options.items():
             create_widget_for_value_widget(option, value)
     else:
@@ -83,6 +90,9 @@ def create_widget_for_option_value(value):
         value_slider.setValue(refine_value_for_slider(value))
         DataElements.input_value = None
 
+        def if_is_not_numeric_include_dot(text):
+            return text.find(",") == -1 and (text.isdigit() or text.replace(".", "", 1).isdigit())
+
         def update_slider(val):
             # update_line_edit를 통해 slider 값이 변경되어 update_slider가 호출되는 경우의 if 조건
             if DataElements.input_value is not None:
@@ -95,17 +105,20 @@ def create_widget_for_option_value(value):
                 value_line_edit.setText(f"{float_value}")
 
         def update_line_edit(text):
-            if text:
+            if text and if_is_not_numeric_include_dot(text):
                 DataElements.input_value = float(text)
                 slider_value = int(DataElements.input_value * 10)
                 slider_value = max(0, min(slider_value, 1000))
                 value_slider.setValue(slider_value)
+            else:
+                value_line_edit.setText(f"{0.0}")
 
         value_slider.valueChanged.connect(update_slider)
 
         value_line_edit = QLineEdit(f"{value}")
-        validator = QDoubleValidator()
-        value_line_edit.setValidator(validator)
+        # validator is not worth it
+        # validator = QDoubleValidator()
+        # value_line_edit.setValidator(validator)
         value_line_edit.editingFinished.connect(lambda: update_line_edit(value_line_edit.text()))
         value_line_edit.returnPressed.connect(lambda: update_line_edit(value_line_edit.text()))
 

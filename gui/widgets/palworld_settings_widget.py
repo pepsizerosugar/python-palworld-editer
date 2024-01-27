@@ -38,7 +38,7 @@ class PalWorldSettingsWidget(QMainWindow):
         # 테이블 위젯 생성
         UIElements.settings_table_widget = QTableWidget()
         UIElements.settings_table_widget.setColumnCount(3)
-        UIElements.settings_table_widget.setHorizontalHeaderLabels(["설정 항목", "번역", "설정 UI"])
+        UIElements.settings_table_widget.setHorizontalHeaderLabels(['Option', 'Value', 'Description'])
 
         # 테이블 위젯을 레이아웃에 추가
         UIElements.settings_box_layout.addWidget(UIElements.settings_table_widget)

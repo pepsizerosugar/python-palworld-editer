@@ -43,3 +43,7 @@ def if_error_when_update_settings(option, value):
 
 def if_error_when_save_settings_elements_is_none():
     QMessageBox.warning(None, "Warning", f"Error saving settings file: Please try again.")
+
+
+def if_error_when_load_menu_translation(e):
+    QMessageBox.warning(None, "Warning", f"Error loading menu translation: {e}")

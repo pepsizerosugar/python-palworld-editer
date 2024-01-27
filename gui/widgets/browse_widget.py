@@ -1,5 +1,6 @@
-from PyQt5.QtWidgets import QLabel, QComboBox, QPushButton, QVBoxLayout, QHBoxLayout, QWidget, QStatusBar
+from PyQt5.QtWidgets import QLabel, QComboBox, QPushButton, QVBoxLayout, QHBoxLayout, QWidget
 
+from gui.dataclass.data_elements import DataElements
 from gui.dataclass.ui_elements import UIElements
 from utils.file_utils import load_settings_file
 from utils.translation_utils import change_translation_code
@@ -11,7 +12,7 @@ class BrowseWidget:
         UIElements.browse_translation_label.setText("Translation code")
 
         UIElements.browse_translation_combo = QComboBox()
-        UIElements.browse_translation_combo.addItems(["ko", "en", "jp"])
+        UIElements.browse_translation_combo.addItems(DataElements.translation_code_list)
         UIElements.browse_translation_combo.currentIndexChanged.connect(
             lambda index: change_translation_code(index))
 
