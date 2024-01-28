@@ -1,6 +1,6 @@
 # python-palworld-editer
 
-![Version](https://img.shields.io/badge/Version-1.0.0-green)
+![Version](https://img.shields.io/badge/Version-1.0.1-green)
 ![Update](https://img.shields.io/badge/Update-2024.01.28-blue)
 [![CodeFactor](https://www.codefactor.io/repository/github/pepsizerosugar/python-palworld-editer/badge)](https://www.codefactor.io/repository/github/pepsizerosugar/python-palworld-editer)
 ![GitHub all releases](https://img.shields.io/github/downloads/pepsizerosugar/python-palworld-editer/total?color=orange)
@@ -18,10 +18,10 @@
 
 ## 0. Change Log
 
-### version 1.0.0 (2024.01.28)
+### version 1.0.1 (2024.01.29)
 
 * Commit history
-    * [juntiger-011] feat: 1.0.0
+    * [juntiger-011] feat: 1.0.1
 * Upcoming feature (#To-do)
     * Translation
     * More intuitive UI
@@ -81,9 +81,9 @@
 ### 2-1. Translation
 
 * If you want to translate the program into another language, you can translate it by editing the translation file.
-* The translation file is located in the "resource" folder and the file name is "PalWorldSettings.xlsx" or "
-  PalWorldSettings.json".
-* PalWorldSettings.xlsx is the better way to translate because you just run exelTojson.py after you add the new column
+* The translation file is located in the "resource" folder and the file name is "translations.xlsx" or "
+  translations.json".
+* translations.xlsx is the better way to translate because you just run exelTojson.py after you add the new column
   and input the translation. and then, translation json is automatically updated.
   * <img src="resources/img/demo/xlsx.png">
   * <img src="resources/img/demo/translation_json.png">
