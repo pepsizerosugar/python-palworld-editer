@@ -13,6 +13,10 @@ def if_update_settings_finished():
     QMessageBox.information(None, "Information", "Settings updated finished.")
 
 
+def if_error_when_load_palworld_options_type(e):
+    QMessageBox.warning(None, "Warning", f"Error loading palworld options type: {e}")
+
+
 def if_error_when_load_special_options_file(e):
     QMessageBox.warning(None, "Warning", f"Error loading special options file: {e}")
 

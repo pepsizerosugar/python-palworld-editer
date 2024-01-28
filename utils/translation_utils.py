@@ -8,10 +8,9 @@ def change_translation_code(index):
     DataElements.translation_code = DataElements.translation_code_list[index]
 
 
-def load_translations(filename):
+def load_translations():
     try:
-        # 번역 파일이 resources/ 폴더에 있다고 가정
-        translation_file_path = f"resources/{filename}"
+        translation_file_path = f"resources/config/translations.json"
         with open(translation_file_path, 'r', encoding='utf-8') as file:
             translations = json.load(file)
 
@@ -23,5 +22,4 @@ def load_translations(filename):
 
 
 def convert_translation_list_to_dict(translations):
-    # 번역 파일이 리스트일 경우 딕셔너리로 변환하는 함수
     return {entry["parameter"]: entry for entry in translations}

@@ -31,10 +31,9 @@ def set_table_header_with_translation():
 
 
 def set_table_widget_data():
-    DataElements.palworld_options.pop("OptionSettings")
+    # DataElements.palworld_options.pop("OptionSettings")
     DataElements.options_translations = convert_translation_list_to_dict(DataElements.options_translations)
 
-    # 첫 파일 로드 시는 데이터 삽입
     if DataElements.is_first_load:
         set_table_header_with_translation()
         for option, value in DataElements.palworld_options.items():
@@ -57,15 +56,18 @@ def set_table_widget_data():
 
 
 def create_widget_for_value_widget(option, value):
-    settings_value_widget = create_widget_for_option_value(
-        value) if option not in DataElements.special_palworld_options else QLineEdit(str(value))
+    if not DataElements.palworld_options_type:
+        settings_value_widget = create_widget_for_option_value_when_setting_is_not_exist(
+            value) if option not in DataElements.special_palworld_options else QLineEdit(str(value))
+    else:
+        settings_value_widget = create_widget_for_option_value(option, value)
     add_row_to_table(option, settings_value_widget)
 
 
 def update_settings(row_index, option, value):
     """
-        글자형(텍스트 입력) = QTableWidgetItem
-        숫자형(슬라이더 + 숫자 입력), 선택형(라디오 버튼) = QWidget
+    글자형(텍스트 입력) = QTableWidgetItem
+    숫자형(슬라이더 + 숫자 입력), 선택형(라디오 버튼) = QWidget
     """
     exist_item = UIElements.settings_table_widget.item(row_index, 2)
     if exist_item:
@@ -82,83 +84,108 @@ def refine_value_for_slider(value):
     return slider_value
 
 
-def create_widget_for_option_value(value):
+def create_widget_for_option_value(option, value):
+    option_type = DataElements.palworld_options_type.get(option, None)
+    if option_type:
+        """
+        str: line edit
+        int: 0 ~ no limit (line edit)
+        float: 0.00 ~ 100.00 (slider + line edit)
+        bool: True, False (radio button)
+        """
+        match option_type:
+            case "str":
+                if option != "DeathPenalty":
+                    return QLineEdit(str(value))
+                else:
+                    return QLineEdit("None")
+            case "int":
+                return QLineEdit(str(value))
+            case "float":
+                return create_widget_for_float_type(value)
+            case "bool":
+                return create_widget_for_bool_type(value)
+            case _:
+                return QLineEdit(str(value))
+    else:
+        return QLineEdit(str(value))
+
+
+def create_widget_for_float_type(value):
+    value_slider = QSlider(Qt.Horizontal)
+    value_slider.setRange(0, 1000)
+    value_slider.setTickInterval(10)
+    value_slider.setValue(refine_value_for_slider(value))
+    DataElements.input_value = None
+
+    def if_is_not_numeric_include_dot(text):
+        return text.find(",") == -1 and (text.isdigit() or text.replace(".", "", 1).isdigit())
+
+    def update_slider(val):
+        if DataElements.input_value is not None:
+            input_value = max(0, min(DataElements.input_value, 100))
+            value_line_edit.setText(f"{input_value}")
+            DataElements.input_value = None
+        else:
+            float_value = val / 10
+            value_line_edit.setText(f"{float_value}")
+
+    def update_line_edit(text):
+        if text and if_is_not_numeric_include_dot(text):
+            DataElements.input_value = float(text)
+            slider_value = int(DataElements.input_value * 10)
+            slider_value = max(0, min(slider_value, 1000))
+            value_slider.setValue(slider_value)
+        else:
+            value_line_edit.setText(f"{0.0}")
+
+    value_slider.valueChanged.connect(update_slider)
+
+    value_line_edit = QLineEdit(f"{value}")
+    value_line_edit.editingFinished.connect(lambda: update_line_edit(value_line_edit.text()))
+    value_line_edit.returnPressed.connect(lambda: update_line_edit(value_line_edit.text()))
+
+    return value_slider, value_line_edit
+
+
+def create_widget_for_bool_type(value):
+    value = str_bool_to_bool(value)
+    value_radio_true = QRadioButton("True")
+    value_radio_false = QRadioButton("False")
+
+    radio_button_group = QButtonGroup()
+    radio_button_group.addButton(value_radio_true)
+    radio_button_group.addButton(value_radio_false)
+
+    value_radio_true.setChecked(value)
+    value_radio_false.setChecked(not value)
+
+    def update_radio_button():
+        if value_radio_true.isChecked():
+            value_radio_false.setChecked(False)
+        else:
+            value_radio_true.setChecked(False)
+
+    value_radio_true.toggled.connect(lambda: update_radio_button())
+    value_radio_false.toggled.connect(lambda: update_radio_button())
+
+    return value_radio_true, value_radio_false
+
+
+def create_widget_for_option_value_when_setting_is_not_exist(value):
     if isinstance(value, (int, float)):
-        value_slider = QSlider(Qt.Horizontal)
-        value_slider.setRange(0, 1000)
-        value_slider.setTickInterval(10)
-        value_slider.setValue(refine_value_for_slider(value))
-        DataElements.input_value = None
-
-        def if_is_not_numeric_include_dot(text):
-            return text.find(",") == -1 and (text.isdigit() or text.replace(".", "", 1).isdigit())
-
-        def update_slider(val):
-            # update_line_edit를 통해 slider 값이 변경되어 update_slider가 호출되는 경우의 if 조건
-            if DataElements.input_value is not None:
-                input_value = max(0, min(DataElements.input_value, 100))
-                value_line_edit.setText(f"{input_value}")
-                DataElements.input_value = None
-            # 실제 slider 값이 변경되어 update_slider가 호출되는 경우의 if 조건
-            else:
-                float_value = val / 10
-                value_line_edit.setText(f"{float_value}")
-
-        def update_line_edit(text):
-            if text and if_is_not_numeric_include_dot(text):
-                DataElements.input_value = float(text)
-                slider_value = int(DataElements.input_value * 10)
-                slider_value = max(0, min(slider_value, 1000))
-                value_slider.setValue(slider_value)
-            else:
-                value_line_edit.setText(f"{0.0}")
-
-        value_slider.valueChanged.connect(update_slider)
-
-        value_line_edit = QLineEdit(f"{value}")
-        # validator is not worth it
-        # validator = QDoubleValidator()
-        # value_line_edit.setValidator(validator)
-        value_line_edit.editingFinished.connect(lambda: update_line_edit(value_line_edit.text()))
-        value_line_edit.returnPressed.connect(lambda: update_line_edit(value_line_edit.text()))
-
-        return value_slider, value_line_edit
+        return create_widget_for_float_type(value)
 
     if isinstance(value, str) and value.lower() in ['true', 'false']:
-        value = str_bool_to_bool(value)
-        value_radio_true = QRadioButton("True")
-        value_radio_false = QRadioButton("False")
-
-        radio_button_group = QButtonGroup()
-        radio_button_group.addButton(value_radio_true)
-        radio_button_group.addButton(value_radio_false)
-
-        value_radio_true.setChecked(value)
-        value_radio_false.setChecked(not value)
-
-        # 라디오 버튼 핸들링
-        def update_radio_button():
-            if value_radio_true.isChecked():
-                value_radio_false.setChecked(False)
-            else:
-                value_radio_true.setChecked(False)
-
-        value_radio_true.toggled.connect(lambda: update_radio_button())
-        value_radio_false.toggled.connect(lambda: update_radio_button())
-
-        return value_radio_true, value_radio_false
+        return create_widget_for_bool_type(value)
 
     return QLineEdit(str(value))
 
 
-# 이 메소드로 넘어온 item 속 데이터는 QLineEdit이다.
 def update_settings_to_table_with_qtable_item(item, new_value):
-    # QLineEdit의 text() 메소드로 데이터를 가져올 수 있다.
-    # 가져온 데이터를 기존 설정 항목의 설정 값으로 갱신한다.
     item.setText(str(new_value))
 
 
-# 이 메소드로 넘어온 widget은 QWidget이다.
 def update_settings_to_table_with_qtable_widget(widget, option, new_value):
     children = widget.children()
     """
@@ -188,48 +215,35 @@ def update_settings_to_table_with_qtable_widget(widget, option, new_value):
 
 
 def load_settings_from_table():
-    # 이 메소드에서는 기존 테이블의 데이터를 가져와서 설정 파일을 갱신한다.
-    # 바로 처리하지 않고 임시 변수에 저장한 후, 파일 저장 시에 한꺼번에 처리한다.
     palworld_options_to_save = {}
 
     for row_index in range(UIElements.settings_table_widget.rowCount()):
-        # 기존 설정 항목 가져오기
         option_str = UIElements.settings_table_widget.item(row_index, 0).text()
-
-        # 기존 설정 항목의 설정 값 아이템을 가져온다
         """
         글자형(텍스트 입력) = QTableWidgetItem
         숫자형(슬라이더 + 숫자 입력), 선택형(라디오 버튼) = QWidget
         """
         value_item = UIElements.settings_table_widget.item(row_index, 2)
         if value_item:
-            # 글자형
             palworld_options_to_save[option_str] = value_item.text()
         else:
-            # 숫자형, 선택형
             value_widget = UIElements.settings_table_widget.cellWidget(row_index, 2)
             children = value_widget.children()
             if isinstance(children[1], QRadioButton):
-                # 선택형
                 palworld_options_to_save[option_str] = children[1].isChecked()
             elif isinstance(children[2], QLineEdit):
-                # 숫자형
                 palworld_options_to_save[option_str] = children[2].text()
-
     return palworld_options_to_save
 
 
 def add_row_to_table(option, widgets):
-    # 테이블에 행 추가
     row_position = UIElements.settings_table_widget.rowCount()
     UIElements.settings_table_widget.insertRow(row_position)
 
-    # 설정 항목 열 추가
     item_option = QTableWidgetItem(option)
     item_option.setFlags(Qt.ItemIsEnabled)
     UIElements.settings_table_widget.setItem(row_position, 0, item_option)
 
-    # 번역 열 추가
     translation_label = QLabel(
         DataElements.options_translations.get(option, {}).get(DataElements.translation_code, option))
     UIElements.settings_table_widget.setCellWidget(row_position, 1, translation_label)

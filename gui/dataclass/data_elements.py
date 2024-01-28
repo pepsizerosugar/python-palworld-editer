@@ -5,6 +5,7 @@ from dataclasses import dataclass
 class DataElements:
     translation_code: None
     special_settings_file_path: None
+    palworld_options_type: None
     settings_file_path: None
     is_first_load: None
     special_palworld_options: None

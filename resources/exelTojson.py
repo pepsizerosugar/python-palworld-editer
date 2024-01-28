@@ -4,8 +4,8 @@ import os
 import pandas as pd
 
 script_dir = os.path.dirname(__file__)
-excel_path = os.path.join(script_dir, 'PalWorldSettings.xlsx')
-json_path = os.path.join(script_dir, 'PalWorldSettings.json')
+excel_path = os.path.join(script_dir, 'translations.xlsx')
+json_path = os.path.join(script_dir, 'translations.json')
 
 
 def excel_to_json(excel_file_path, json_file_path):
