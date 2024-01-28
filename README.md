@@ -21,7 +21,7 @@
 ### version 1.0.1 (2024.01.29)
 
 * Commit history
-    * [juntiger-011] feat: 1.0.1
+    * [juntiger-012] feat: 1.0.1
 * Upcoming feature (#To-do)
     * Translation
     * More intuitive UI
