@@ -21,6 +21,7 @@
 ### version 1.0.2 (2024.01.29)
 
 * Commit history
+    * [juntiger-017] fix: bool value save
     * [juntiger-015] fix: can't parse http address, feat: changer load logic of translations
     * [juntiger-014] fix: translation key mismatch
 * Upcoming feature (#To-do)
