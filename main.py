@@ -8,11 +8,13 @@ from PyQt5.QtWidgets import QApplication, QMainWindow
 
 from gui.dataclass.ui_elements import UIElements
 from gui.initialize import InitializeUI
+from utils.version_checker import VersionChecker
 
 
 class MainClass(QMainWindow):
     def __init__(self):
         super().__init__()
+        VersionChecker().check_version()
         UIElements.browse_window = self
         InitializeUI.__init__(self)
 
