@@ -1,9 +1,4 @@
 {
-  "translation_code": [
-    "ko",
-    "en",
-    "jp"
-  ],
   "default": {
     "parameter": "Parameter",
     "description": "Description",

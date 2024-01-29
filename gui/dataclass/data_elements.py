@@ -3,6 +3,7 @@ from dataclasses import dataclass
 
 @dataclass
 class DataElements:
+    metadata: None
     translation_code: None
     special_settings_file_path: None
     palworld_options_type: None

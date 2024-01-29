@@ -81,14 +81,11 @@
 ### 2-1. Translation
 
 * If you want to translate the program into another language, you can translate it by editing the translation file.
-* The translation file is located in the "resource" folder and the file name is "translations.xlsx" or "
-  translations.json".
-* translations.xlsx is the better way to translate because you just run exelTojson.py after you add the new column
-  and input the translation. and then, translation json is automatically updated.
-  * <img src="resources/img/demo/xlsx.png">
-  * <img src="resources/img/demo/translation_json.png">
-* And, Add the translation code to the "translation_code" list in the "menu.json" file.
-  * <img src="resources/img/demo/translation_code.png">
+* The translation file is located in the "resource/config/translation" folder and the file name is "translations.xlsx".
+* If you add a new language, you must add a new column with translation code in the first row (like "en", "ko", "jp").
+* After that you can translate the description by editing the second row.
+* End of the translation, program will automatically load the translation file.
+    * <img src="resources/img/demo/xlsx.png">
 
 ### 2-2. Reference
 

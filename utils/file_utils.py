@@ -8,10 +8,42 @@ from gui.dataclass.ui_elements import UIElements
 from gui.dialogs.dialogs import dialog_for_load_settings_file, dialog_for_save_settings_file
 from gui.messageboxs.message_boxs import if_settings_file_is_not_loaded, if_error_when_load_settings_file, \
     if_error_when_save_settings_file, if_save_settings_file_success, if_error_when_save_settings_elements_is_none, \
-    if_load_settins_file_is_finished, if_error_when_load_special_options_file, if_error_when_load_menu_translation, \
-    if_error_when_load_palworld_options_type
-from gui.utils.gui_utils import resize_windows, set_table_widget_data, move_center, load_settings_from_table
-from utils.translation_utils import load_translations
+    if_load_settins_file_is_finished, if_error_when_load_menu_translation, \
+    if_error_when_load_palworld_options_type, if_error_when_load_metadata
+from gui.utils.gui_utils import resize_windows, set_editor_table_widget_data, move_center, load_settings_from_table
+from utils.translation_utils import load_option_description_translations_with_xlsx
+
+
+def init_file_utils():
+    load_metadata()
+    load_translations()
+    load_palworld_options_type()
+
+
+def load_metadata():
+    try:
+        DataElements.metadata = {}
+        try:
+            with open("resources/config/meta.json", 'r', encoding='utf-8') as file:
+                DataElements.metadata = json.loads(file.read())
+        except FileExistsError:
+            pass
+    except Exception as e:
+        if_error_when_load_metadata(e)
+
+
+def load_translations():
+    try:
+        DataElements.menu_translations = {}
+        DataElements.options_translations = []
+        try:
+            with open("resources/config/translation/menu.json", 'r', encoding='utf-8') as file:
+                DataElements.menu_translations = json.loads(file.read())
+                DataElements.options_translations = load_option_description_translations_with_xlsx()
+        except FileExistsError:
+            pass
+    except Exception as e:
+        if_error_when_load_menu_translation(e)
 
 
 def load_palworld_options_type():
@@ -26,51 +58,34 @@ def load_palworld_options_type():
         if_error_when_load_palworld_options_type(e)
 
 
-def load_special_options_file():
-    try:
-        DataElements.special_palworld_options = {}
-        DataElements.special_settings_file_path = "resources/config/special_options.json"
-        try:
-            with open(DataElements.special_settings_file_path, 'r', encoding='utf-8') as file:
-                DataElements.special_palworld_options = json.loads(file.read())
-        except FileExistsError:
-            pass
-    except Exception as e:
-        if_error_when_load_special_options_file(e)
-
-
 def load_settings_file(window):
-    load_special_options_file()
-    load_palworld_options_type()
     DataElements.settings_file_path = dialog_for_load_settings_file(window)
     if DataElements.settings_file_path:
-        DataElements.palworld_options = parse_settings_file(DataElements.settings_file_path)
-        DataElements.options_translations = load_translations()
+        DataElements.palworld_options = parse_settings_file()
         if DataElements.is_first_load:
-            UIElements.settings_window.setDisabled(False)
-            UIElements.settings_window = qtmodern.windows.ModernWindow(UIElements.settings_window)
-            UIElements.settings_window.show()
             UIElements.browse_window.close()
-            set_table_widget_data()
+            set_editor_table_widget_data()
+            UIElements.editor_window.setDisabled(False)
+            UIElements.editor_window = qtmodern.windows.ModernWindow(UIElements.editor_window)
+            UIElements.editor_window.show()
             resize_windows()
-            move_center(UIElements.settings_window)
-            DataElements.is_first_load = False
+            move_center(UIElements.editor_window)
             if_load_settins_file_is_finished()
+            DataElements.is_first_load = False
         else:
-            set_table_widget_data()
+            set_editor_table_widget_data()
 
 
-def parse_settings_file(file_path):
+def parse_settings_file():
     try:
-        with open(file_path, 'r', encoding='utf-8') as file:
+        with open(DataElements.settings_file_path, 'r', encoding='utf-8') as file:
             content = file.read()
             options = {}
 
             pattern = r"\(([\w\W]*?)\)"
-            matches = re.search(pattern, content).group(1)
-
-            pattern = r"(\w+)\s*=\s*\"?([\w\W]*?)\"?\s*,"
-            matches = re.findall(pattern, matches)
+            matches = re.search(pattern, content).group(1).split(",")
+            matches = [match.split("=") for match in matches]
+            matches = [(name, value.strip('\"')) for name, value in matches]
 
             for match in matches:
                 option, value = match
@@ -80,20 +95,6 @@ def parse_settings_file(file_path):
     except Exception as e:
         if_error_when_load_settings_file(e)
         return None
-
-
-def load_menu_translation():
-    try:
-        DataElements.menu_translations = {}
-        DataElements.translation_code_list = []
-        try:
-            with open("resources/config/menu.json", 'r', encoding='utf-8') as file:
-                DataElements.menu_translations = json.loads(file.read())
-                DataElements.translation_code_list = list(DataElements.menu_translations["translation_code"])
-        except FileExistsError:
-            pass
-    except Exception as e:
-        if_error_when_load_menu_translation(e)
 
 
 def save_settings_file():
@@ -108,7 +109,7 @@ def save_settings_file():
 def save_as_settings_file():
     check_is_settings_loaded()
 
-    save_path = dialog_for_save_settings_file(UIElements.settings_window)
+    save_path = dialog_for_save_settings_file(UIElements.editor_window)
 
     if save_path:
         save_file(save_path)
