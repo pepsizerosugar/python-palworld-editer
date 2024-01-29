@@ -226,7 +226,7 @@ def load_settings_from_table():
             value_widget = UIElements.editor_table_widget.cellWidget(row_index, 2)
             children = value_widget.children()
             if isinstance(children[1], QRadioButton):
-                palworld_options_to_save[option_str] = children[1].isChecked()
+                palworld_options_to_save[option_str] = children[1].isChecked() if children[1].isChecked() else False
             elif isinstance(children[2], QLineEdit):
                 palworld_options_to_save[option_str] = children[2].text()
     return palworld_options_to_save

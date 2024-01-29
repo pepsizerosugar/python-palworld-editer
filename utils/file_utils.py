@@ -132,7 +132,7 @@ def save_file(save_path):
                 file.write("OptionSettings=(")
 
                 for option, value in DataElements.palworld_options_to_save.items():
-                    if value:
+                    if value or isinstance(value, bool):
                         option_type = DataElements.palworld_options_type[option]
                         match option_type:
                             case "str":
