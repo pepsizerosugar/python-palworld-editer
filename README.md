@@ -1,6 +1,6 @@
 # python-palworld-editer
 
-![Version](https://img.shields.io/badge/Version-1.0.1-green)
+![Version](https://img.shields.io/badge/Version-1.0.2-green)
 ![Update](https://img.shields.io/badge/Update-2024.01.28-blue)
 [![CodeFactor](https://www.codefactor.io/repository/github/pepsizerosugar/python-palworld-editer/badge)](https://www.codefactor.io/repository/github/pepsizerosugar/python-palworld-editer)
 ![GitHub all releases](https://img.shields.io/github/downloads/pepsizerosugar/python-palworld-editer/total?color=orange)
@@ -18,12 +18,12 @@
 
 ## 0. Change Log
 
-### version 1.0.1 (2024.01.29)
+### version 1.0.2 (2024.01.29)
 
 * Commit history
-    * [juntiger-012] feat: 1.0.1
+    * [juntiger-015] fix: can't parse http address, feat: changer load logic of translations
+    * [juntiger-014] fix: translation key mismatch
 * Upcoming feature (#To-do)
-    * Translation
     * More intuitive UI
     * More stable code
     * Diff between two server setting files
@@ -81,14 +81,11 @@
 ### 2-1. Translation
 
 * If you want to translate the program into another language, you can translate it by editing the translation file.
-* The translation file is located in the "resource" folder and the file name is "translations.xlsx" or "
-  translations.json".
-* translations.xlsx is the better way to translate because you just run exelTojson.py after you add the new column
-  and input the translation. and then, translation json is automatically updated.
-  * <img src="resources/img/demo/xlsx.png">
-  * <img src="resources/img/demo/translation_json.png">
-* And, Add the translation code to the "translation_code" list in the "menu.json" file.
-  * <img src="resources/img/demo/translation_code.png">
+* The translation file is located in the "resource/config/translation" folder and the file name is "translations.xlsx".
+* If you add a new language, you must add a new column with translation code in the first row (like "en", "ko", "jp").
+* After that you can translate the description by editing the second row.
+* End of the translation, program will automatically load the translation file.
+    * <img src="resources/img/demo/xlsx.png">
 
 ### 2-2. Reference
 

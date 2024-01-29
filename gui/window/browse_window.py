@@ -6,7 +6,7 @@ from utils.file_utils import load_settings_file
 from utils.translation_utils import change_translation_code
 
 
-class BrowseWidget:
+class BrowseWindow:
     def __init__(self):
         UIElements.browse_translation_label = QLabel()
         UIElements.browse_translation_label.setText("Translation code")
