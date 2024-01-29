@@ -60,13 +60,13 @@
     "jp": "プレイヤーが受けるダメージを微調整します"
   },
   {
-    "parameter": "PlayerStomachDecreaseRate",
+    "parameter": "PlayerStomachDecreaceRate",
     "ko": "플레이어의 배고픔 감소 배율을 조절합니다",
     "en": "Adjusts the rate at which the player's stomach decreases",
     "jp": "プレイヤーの飢餓減少倍率を調整します"
   },
   {
-    "parameter": "PlayerStaminaDecreaseRate",
+    "parameter": "PlayerStaminaDecreaceRate",
     "ko": "플레이어의 스태미너 감소 배율을 조절합니다",
     "en": "Adjusts the rate at which the player's stamina decreases",
     "jp": "プレイヤーのスタミナ減少倍率を調整します"
@@ -84,13 +84,13 @@
     "jp": "睡眠中に自動的に発生するプレイヤーの体力再生倍率を調整します"
   },
   {
-    "parameter": "PalStomachDecreaseRate",
+    "parameter": "PalStomachDecreaceRate",
     "ko": "팰의 배고픔 감소 배율을 조절합니다",
     "en": "Adjusts the rate at which Pal creature stomach decreases",
     "jp": "パルの飢餓減少倍率を調整します"
   },
   {
-    "parameter": "PalStaminaDecreaseRate",
+    "parameter": "PalStaminaDecreaceRate",
     "ko": "팰의 스태미너 감소 배율을 조절합니다",
     "en": "Adjusts the rate at which Pal creature stamina decreases",
     "jp": "パルのスタミナ減少倍率を調整します"

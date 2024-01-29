@@ -2,8 +2,8 @@
   "PlayerRelated": {
     "PlayerDamageRateAttack": "float",
     "PlayerDamageRateDefense": "float",
-    "PlayerStomachDecreaseRate": "float",
-    "PlayerStaminaDecreaseRate": "float",
+    "PlayerStomachDecreaceRate": "float",
+    "PlayerStaminaDecreaceRate": "float",
     "PlayerAutoHPRegeneRate": "float",
     "PlayerAutoHpRegeneRateInSleep": "float",
     "bEnablePlayerToPlayerDamage": "bool",
@@ -16,8 +16,8 @@
     "PalSpawnNumRate": "float",
     "PalDamageRateAttack": "float",
     "PalDamageRateDefense": "float",
-    "PalStomachDecreaseRate": "float",
-    "PalStaminaDecreaseRate": "float",
+    "PalStomachDecreaceRate": "float",
+    "PalStaminaDecreaceRate": "float",
     "PalAutoHPRegeneRate": "float",
     "PalAutoHpRegeneRateInSleep": "float",
     "PalEggDefaultHatchingTime": "int"
