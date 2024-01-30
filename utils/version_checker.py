@@ -46,14 +46,15 @@ class VersionChecker:
 
                 while True:
                     if os.path.exists('update_not_needed.txt'):
+                        print(f"Update is not needed. Shutting down the updater.")
+                        update_process.kill()
                         os.remove('update_not_needed.txt')
                         break
 
                     if os.path.exists('shutdown_request.txt'):
-                        update_process.terminate()
-                        update_process.wait()
-                        os.remove('shutdown_request.txt')
-                        break
+                        print(f"Shutting down the My Self.")
+                        print(f"Wait for killing...")
+                        pass
 
                     if time.time() - start_time > self.max_loop_time:
                         break

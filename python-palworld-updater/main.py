@@ -87,7 +87,7 @@ class Updater:
         print(f"update type: {update_type}")
         if update_type == MAJOR_UPDATE:
             if_required_update(self)
-        elif update_type == (RECOMMENDED_UPDATE or PATCH_UPDATE):
+        elif update_type == RECOMMENDED_UPDATE or update_type == PATCH_UPDATE:
             if_recommended_update(self)
         else:
             if_update_is_not_needed()
@@ -97,6 +97,24 @@ class Updater:
             sys.exit()
 
     def update_app(self):
+        try:
+            with open('shutdown_request.txt', 'w') as f:
+                f.write('shutdown')
+            # get PalEditor.exe process and wait for it to close
+            while True:
+                try:
+                    for proc in psutil.process_iter():
+                        if proc.name() == "PalEditor.exe":
+                            proc.kill()
+                            proc.wait()
+                            break
+                        time.sleep(0.5)
+                    break
+                except Exception as e:
+                    print(e)
+        except Exception as e:
+            if_error_when_kill_process(e)
+
         _release = self.releases.get("assets")[0].get("browser_download_url")
 
         try:
@@ -134,12 +152,6 @@ class Updater:
         except Exception as e:
             if_error_when_unzip_update_files(e)
             return
-
-        try:
-            with open('shutdown_request.txt', 'w') as f:
-                f.write('shutdown')
-        except Exception as e:
-            if_error_when_kill_process(e)
 
         try:
             update_files_directory = os.path.join(update_directory, "update")
