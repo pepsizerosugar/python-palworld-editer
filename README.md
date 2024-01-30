@@ -13,7 +13,7 @@
     * [qtmodern](https://github.com/gmarull/qtmodern) theme
 
 <br>
-<img src="resources/img/demo/demo.webp"/>
+<img src="resource/img/demo/demo.webp"/>
 <br><br>
 
 ## 0. Change Log
@@ -49,7 +49,7 @@
 ### 1-2. How to use
 
 * 1-2-1. Load server setting file
-    * <img src="resources/img/demo/browse_menu.png"/>
+    * <img src="resource/img/demo/browse_window.png"/>
 
     1. Click the "Translation code" drop down menu and select the language you want to translate.
         1. From now, only English, Korean, and Japanese are supported.
@@ -57,14 +57,14 @@
     3. Select the server setting file you want to edit. (PalWorldSettings.ini)
 
 * 1-2-2. Load settings
-    * <img src="resources/img/demo/settings_menu.png">
+    * <img src="resource/img/demo/settings_window.png">
 
     1. If loaded successfully, the server settings will be displayed in the table.
 
 * 1-2-3. Edit settings
     1. Edit the settings you want to change.
     2. Click the "File" menu at the top left of the window and select "Save" or "Save As" to save the edited settings.
-        1. <img src="resources/img/demo/file_menubar.png">
+        1. <img src="resource/img/demo/file_menubar.png">
         2. Or Just press Ctrl + S to save the edited settings, or Ctrl + Shift + S to save the edited settings as a new
            file.
         3. If you want to save the settings as a new file, enter the file name you want to save in the pop-up window and
@@ -85,7 +85,7 @@
 * If you add a new language, you must add a new column with translation code in the first row (like "en", "ko", "jp").
 * After that you can translate the description by editing the second row.
 * End of the translation, program will automatically load the translation file.
-    * <img src="resources/img/demo/xlsx.png">
+    * <img src="resource/img/demo/xlsx.png">
 
 ### 2-2. Reference
 

@@ -10,7 +10,7 @@ class BannerLabel:
     def __init__(self):
         UIElements.banner_label = QLabel()
         UIElements.banner_label.setAlignment(Qt.AlignCenter)
-        banner_path = 'resources/img/banner.jpg'
+        banner_path = 'resource/img/banner.jpg'
         try:
             if QImageReader(banner_path).size().width() > 0:
                 pixmap = QPixmap(banner_path)

@@ -14,16 +14,16 @@ from utils.version_checker import VersionChecker
 class MainClass(QMainWindow):
     def __init__(self):
         super().__init__()
-        VersionChecker().check_version()
+        VersionChecker()
         UIElements.browse_window = self
-        InitializeUI.__init__(self)
+        InitializeUI().__init__()
 
 
 if __name__ == '__main__':
     QApplication.setAttribute(QtCore.Qt.AA_EnableHighDpiScaling)
 
     app = QApplication(sys.argv)
-    app.setWindowIcon(QIcon('resources/img/icon.ico'))
+    app.setWindowIcon(QIcon('resource/img/icon.ico'))
     qtmodern.styles.dark(app)
 
     window = MainClass()

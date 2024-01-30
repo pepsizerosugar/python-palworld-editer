@@ -1,6 +1,6 @@
 @echo off
-pyinstaller -F -w -i resources\img\icon.ico --add-data="resources\img\icon.ico;resource" -n PalEditor main.py
-set dir=dist\resources
+pyinstaller -F -i resource\img\icon.ico --add-data="resource\img\icon.ico;resource" -n PalEditor main.py
+set dir=dist\resource
 if not exist %dir% mkdir %dir%
-xcopy resources\* %dir% /E
+xcopy resource\* %dir% /E
 pause

@@ -9,7 +9,7 @@ def change_translation_code(index):
 def load_option_description_translations_with_xlsx():
     DataElements.translation_code_list = []
     try:
-        translation_file_path = "resources/config/translation/translations.xlsx"
+        translation_file_path = "resource/config/translation/translations.xlsx"
         import pandas as pd
         translations = pd.read_excel(translation_file_path, engine='openpyxl').to_dict('records')
         DataElements.translation_code_list = list(translations[0].keys())[1:]

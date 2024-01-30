@@ -24,7 +24,7 @@ def load_metadata():
     try:
         DataElements.metadata = {}
         try:
-            with open("resources/config/meta.json", 'r', encoding='utf-8') as file:
+            with open("resource/config/meta.json", 'r', encoding='utf-8') as file:
                 DataElements.metadata = json.loads(file.read())
         except FileExistsError:
             pass
@@ -37,7 +37,7 @@ def load_translations():
         DataElements.menu_translations = {}
         DataElements.options_translations = []
         try:
-            with open("resources/config/translation/menu.json", 'r', encoding='utf-8') as file:
+            with open("resource/config/translation/menu.json", 'r', encoding='utf-8') as file:
                 DataElements.menu_translations = json.loads(file.read())
                 DataElements.options_translations = load_option_description_translations_with_xlsx()
         except FileExistsError:
@@ -50,7 +50,7 @@ def load_palworld_options_type():
     try:
         DataElements.palworld_options_type = {}
         try:
-            with open("resources/config/options_type.json", 'r', encoding='utf-8') as file:
+            with open("resource/config/options_type.json", 'r', encoding='utf-8') as file:
                 DataElements.palworld_options_type = json.loads(file.read())
         except FileExistsError:
             pass
