@@ -1,6 +1,9 @@
 import os
 import sys
+import threading
 import time
+
+from gui.messageboxs.message_boxs import if_program_need_to_be_shutdown_for_update
 
 MAJOR_UPDATE = 0
 RECOMMENDED_UPDATE = 1
@@ -32,7 +35,8 @@ class VersionChecker:
         self.releases = None
         self.current_version = Version(1, 0, 0)
         self.dir_path = get_running_directory()
-        self.run_updater()
+        thread = threading.Thread(target=self.run_updater)
+        thread.start()
 
     def run_updater(self):
         global update_process
@@ -46,23 +50,17 @@ class VersionChecker:
 
                 while True:
                     if os.path.exists('update_not_needed.txt'):
-                        print(f"Update is not needed. Shutting down the updater.")
                         update_process.kill()
-                        os.remove('update_not_needed.txt')
                         break
 
                     if os.path.exists('shutdown_request.txt'):
-                        print(f"Shutting down the My Self.")
-                        print(f"Wait for killing...")
-                        pass
+                        if_program_need_to_be_shutdown_for_update()
 
                     if time.time() - start_time > self.max_loop_time:
                         break
 
                     time.sleep(1)
             except Exception as e:
-                print(e)
                 pass
         except Exception as e:
-            print(e)
             pass

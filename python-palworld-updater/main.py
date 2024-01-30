@@ -9,7 +9,7 @@ import requests
 
 from message_boxs import if_error_when_check_version_with_request, if_required_update, if_recommended_update, \
     if_error_when_mkdr_update_folder, if_error_when_check_update_files_with_request, if_error_when_unzip_update_files, \
-    if_error_when_kill_process, if_error_when_update_files, if_update_finished, if_update_is_not_needed
+    if_error_when_kill_process, if_error_when_update_files, if_update_finished
 
 MAJOR_UPDATE = 0
 RECOMMENDED_UPDATE = 1
@@ -41,15 +41,6 @@ class Updater:
         self.releases = None
         self.latest_version = Version(None, None, None)
         self.dir_path = get_running_directory()
-        if getattr(sys, 'frozen', False):
-            self.temp_directory = sys._MEIPASS
-        else:
-            self.temp_directory = self.dir_path
-        print(f"current version: {self.current_version}"
-              f"\nrunning directory: {self.dir_path}"
-              f"\ntemp directory: {self.temp_directory}"
-              f"\nrunning frozen: {getattr(sys, 'frozen', False)}"
-              f"\nrunning file: {__file__}")
 
     @staticmethod
     def get_current_version_at_startup():
@@ -74,8 +65,6 @@ class Updater:
         self.handle_update(self.get_update_type())
 
     def get_update_type(self):
-        print(f"current version: {self.current_version}"
-              f"\nlatest version: {self.latest_version}")
         if self.current_version.major < self.latest_version.major:
             return MAJOR_UPDATE
         elif self.current_version.minor < self.latest_version.minor:
@@ -84,41 +73,39 @@ class Updater:
             return PATCH_UPDATE
 
     def handle_update(self, update_type):
-        print(f"update type: {update_type}")
         if update_type == MAJOR_UPDATE:
             if_required_update(self)
         elif update_type == RECOMMENDED_UPDATE or update_type == PATCH_UPDATE:
             if_recommended_update(self)
         else:
-            if_update_is_not_needed()
             with open('update_not_needed.txt', 'w') as f:
                 f.write('update_not_needed')
-            # close updater
             sys.exit()
 
     def update_app(self):
         try:
             with open('shutdown_request.txt', 'w') as f:
                 f.write('shutdown')
-            # get PalEditor.exe process and wait for it to close
             while True:
                 try:
                     for proc in psutil.process_iter():
                         if proc.name() == "PalEditor.exe":
                             proc.kill()
-                            proc.wait()
+                            proc.wait(10)
                             break
-                        time.sleep(0.5)
+                        time.sleep(0.25)
                     break
                 except Exception as e:
-                    print(e)
+                    pass
         except Exception as e:
             if_error_when_kill_process(e)
+        finally:
+            os.remove('shutdown_request.txt')
 
         _release = self.releases.get("assets")[0].get("browser_download_url")
 
         try:
-            update_directory = os.path.join(get_running_directory(), "update")
+            update_directory = os.path.join(self.dir_path, "update")
             if not os.path.exists(update_directory):
                 os.makedirs(update_directory)
             else:
@@ -158,24 +145,23 @@ class Updater:
             for filename in os.listdir(update_files_directory):
                 if filename != "update.zip":
                     source_path = os.path.join(update_files_directory, filename)
-                    destination_path = os.path.join(get_running_directory(), filename)
+                    destination_path = os.path.join(self.dir_path, filename)
 
                     if os.path.exists(destination_path):
                         if os.path.isdir(destination_path):
-                            print(f"remove {destination_path} directory")
                             shutil.rmtree(destination_path)
                         else:
-                            print(f"remove {destination_path} file")
                             os.remove(destination_path)
                     shutil.move(source_path, destination_path)
             os.remove(update_zip_path)
             shutil.rmtree(update_files_directory)
+            shutil.rmtree(update_directory)
         except Exception as e:
             if_error_when_update_files(e)
             return
 
         if_update_finished()
-        os.startfile(os.path.join(get_running_directory(), "PalEditor.exe"))
+        os.startfile(os.path.join(self.dir_path, "PalEditor.exe"))
 
 
 if __name__ == '__main__':

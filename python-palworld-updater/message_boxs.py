@@ -38,7 +38,7 @@ def if_update_is_not_needed():
 
 
 def if_update_finished():
-    QMessageBox.information(None, "Information", "Update finished. Please restart the program.")
+    QMessageBox.information(None, "Information", "Update finished. Automatically restarting the program.")
 
 
 def if_error_when_check_update_files_with_request(e):

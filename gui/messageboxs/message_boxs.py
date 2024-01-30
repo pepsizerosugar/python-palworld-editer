@@ -114,3 +114,8 @@ def if_error_when_mkdr_update_folder(e):
 def if_error_when_kill_process(e):
     QMessageBox.warning(None, "Warning", f"Error killing process: {e}")
     pass
+
+
+def if_program_need_to_be_shutdown_for_update():
+    QMessageBox.information(None, "Information", "Program need shutdown for update.")
+    pass
