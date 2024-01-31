@@ -65,10 +65,10 @@ def create_widget_for_option_value(option, value):
     if option_type:
         match option_type:
             case "str":
-                if option != "DeathPenalty":
+                if value:
                     return QLineEdit(str(value))
                 else:
-                    return QLineEdit("None")
+                    return QLineEdit("None" if value is None else "")
             case "int":
                 return QLineEdit(str(value))
             case "float":
