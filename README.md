@@ -1,6 +1,6 @@
 # python-palworld-editer
 
-![Version](https://img.shields.io/badge/Version-1.0.2-green)
+![Version](https://img.shields.io/badge/Version-1.0.3-green)
 ![Update](https://img.shields.io/badge/Update-2024.01.28-blue)
 [![CodeFactor](https://www.codefactor.io/repository/github/pepsizerosugar/python-palworld-editer/badge)](https://www.codefactor.io/repository/github/pepsizerosugar/python-palworld-editer)
 ![GitHub all releases](https://img.shields.io/github/downloads/pepsizerosugar/python-palworld-editer/total?color=orange)
@@ -18,17 +18,18 @@
 
 ## 0. Change Log
 
-### version 1.0.2 (2024.01.29)
+### version 1.0.3 (2024.01.31)
 
 * Commit history
-    * [juntiger-017] fix: bool value save
-    * [juntiger-015] fix: can't parse http address, feat: changer load logic of translations
-    * [juntiger-014] fix: translation key mismatch
+    * [juntiger-019] fix: save null str value
+    * [juntiger-018] fix: DeathPenalty is None when every load
 * Upcoming feature (#To-do)
     * More intuitive UI
     * More stable code
     * Diff between two server setting files
     * Diff before and after editing
+    * Create new server setting file
+    * Apply float item numerical range
 
 <br>
 
