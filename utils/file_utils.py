@@ -140,10 +140,7 @@ def save_file(save_path):
                             case _:
                                 file.write(f"{option}={value},")
                     else:
-                        if option == "DeathPenalty":
-                            file.write(f"{option}=\"{value}\",")
-                        else:
-                            file.write(f"{option}="",")
+                        file.write(f"{option}=\"{value}\",")
                 file.seek(file.tell() - 1, 0)
                 file.write(")")
             if_save_settings_file_success()
