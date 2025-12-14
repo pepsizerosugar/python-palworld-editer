@@ -1,3 +1,5 @@
+"""Application bootstrap helpers for preparing windows and translations."""
+
 from gui.dataclass.data_elements import DataElements
 from gui.dataclass.ui_elements import UIElements
 from gui.labels.banner_label import BannerLabel
@@ -8,7 +10,11 @@ from utils.file_utils import init_file_utils
 
 
 class InitializeUI:
-    def __init__(self):
+    """Configure shared UI elements and prepare default state."""
+
+    def __init__(self) -> None:
+        """Build the browse and editor windows with defaults applied."""
+
         init_file_utils()
 
         DataElements.translation_code = "ko"

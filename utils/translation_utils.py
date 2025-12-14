@@ -1,24 +1,42 @@
+"""Utilities for loading and switching language translations."""
+
+import json
+from typing import Dict
+
 from gui.dataclass.data_elements import DataElements
 from gui.messageboxs.message_boxs import if_error_when_load_translations
 
 
-def change_translation_code(index):
-    DataElements.translation_code = DataElements.translation_code_list[index]
+def change_translation_code(index: int) -> None:
+    """Update the active translation code by combo-box index.
+
+    Args:
+        index (int): Selected index from the translation combo box.
+    """
+
+    if DataElements.translation_code_list and 0 <= index < len(DataElements.translation_code_list):
+        DataElements.translation_code = DataElements.translation_code_list[index]
 
 
-def load_option_description_translations_with_xlsx():
+def load_option_description_translations() -> Dict[str, Dict[str, str]]:
+    """Load option description translations from the JSON source.
+
+    Returns:
+        dict: Mapping of option names to localized description dictionaries.
+    """
+
     DataElements.translation_code_list = []
     try:
-        translation_file_path = "resources/config/translation/translations.xlsx"
-        import pandas as pd
-        translations = pd.read_excel(translation_file_path, engine='openpyxl').to_dict('records')
-        DataElements.translation_code_list = list(translations[0].keys())[1:]
-        return convert_translation_list_to_dict(translations)
+        translation_file_path = "resources/config/translation/translations.json"
+        with open(translation_file_path, "r", encoding="utf-8") as file:
+            translations: Dict[str, Dict[str, str]] = json.load(file)
 
-    except Exception as e:
-        if_error_when_load_translations(e)
-        return None
+        if translations:
+            first_row = next(iter(translations.values()))
+            DataElements.translation_code_list = list(first_row.keys())
 
+        return translations
 
-def convert_translation_list_to_dict(translations):
-    return {entry["parameter"]: entry for entry in translations}
+    except Exception as exc:  # pylint: disable=broad-except
+        if_error_when_load_translations(exc)
+        return {}
