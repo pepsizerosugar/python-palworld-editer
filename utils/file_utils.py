@@ -127,7 +127,15 @@ def parse_settings_file() -> Dict[str, str]:
             options: Dict[str, str] = {}
 
             def split_with_brackets(value: str) -> List[str]:
-                """Split a string on commas while respecting parentheses and quotes."""
+                """Split a string on commas while respecting parentheses and quotes.
+
+                Args:
+                    value (str): Raw ``OptionSettings`` content to tokenize.
+
+                Returns:
+                    List[str]: Segments broken on commas while preserving bracketed
+                    and quoted groupings.
+                """
 
                 parts: List[str] = []
                 current: List[str] = []

@@ -139,9 +139,24 @@ def create_widget_for_float_type(value: Any) -> Tuple[QSlider, QLineEdit]:
     DataElements.input_value = None
 
     def if_is_not_numeric_include_dot(text: str) -> bool:
+        """Validate numeric input while permitting decimal points.
+
+        Args:
+            text (str): Raw text from the line edit.
+
+        Returns:
+            bool: ``True`` when the text represents a numeric value.
+        """
+
         return text.find(",") == -1 and (text.isdigit() or text.replace(".", "", 1).isdigit())
 
     def update_slider(val: int) -> None:
+        """Synchronize slider movement back into the line edit.
+
+        Args:
+            val (int): Current slider position in the 0-1000 range.
+        """
+
         if DataElements.input_value is not None:
             input_value = max(0, min(DataElements.input_value, 100))
             value_line_edit.setText(f"{input_value}")
@@ -151,6 +166,12 @@ def create_widget_for_float_type(value: Any) -> Tuple[QSlider, QLineEdit]:
             value_line_edit.setText(f"{float_value}")
 
     def update_line_edit(text: str) -> None:
+        """Update the slider position based on edited text.
+
+        Args:
+            text (str): Text content of the line edit.
+        """
+
         if text and if_is_not_numeric_include_dot(text):
             DataElements.input_value = float(text)
             slider_value = int(DataElements.input_value * 10)
@@ -190,6 +211,8 @@ def create_widget_for_bool_type(value: Any) -> Tuple[QRadioButton, QRadioButton]
     value_radio_false.setChecked(not value_bool)
 
     def update_radio_button() -> None:
+        """Ensure only one boolean radio button is active at a time."""
+
         if value_radio_true.isChecked():
             value_radio_false.setChecked(False)
         else:
