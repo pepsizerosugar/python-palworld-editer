@@ -1,6 +1,7 @@
 """Utility helpers for reading, writing, and preparing Palworld settings files."""
 
 import json
+import re
 from typing import Dict, List
 
 import qtmodern.windows
@@ -154,11 +155,11 @@ def parse_settings_file() -> Dict[str, str]:
                     parts.append("".join(current))
                 return parts
 
-            option_parts = content.split("OptionSettings=", 1)
-            if len(option_parts) < 2:
+            option_match = re.search(r"OptionSettings\s*=\s*\(", content)
+            if not option_match:
                 return options
 
-            option_content = option_parts[1]
+            option_content = content[option_match.end() - 1 :]
             if not option_content.startswith("(") or option_content.rfind(")") == -1:
                 return options
 
