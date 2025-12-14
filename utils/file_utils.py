@@ -172,11 +172,20 @@ def parse_settings_file() -> Dict[str, str]:
                 return options
 
             matches = split_with_brackets(option_content[1: option_content.rfind(")")])
-            matches = [match.split("=", 1) for match in matches if match]
-            matches = [(name, value.strip('\"')) for name, value in matches]
+            parsed_pairs = [
+                pair for pair in (match.split("=", 1) for match in matches if match) if len(pair) == 2
+            ]
+            normalized_pairs = [
+                (
+                    name.strip(),
+                    value.strip().strip("\""),
+                )
+                for name, value in parsed_pairs
+            ]
 
-            for option, value in matches:
-                options.update({option: value})
+            for option, value in normalized_pairs:
+                if option:
+                    options[option] = value
             return options
 
     except Exception as exc:  # pylint: disable=broad-except
