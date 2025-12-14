@@ -136,6 +136,7 @@ def create_widget_for_float_type(value: Any) -> Tuple[QSlider, QLineEdit]:
     value_slider.setRange(0, 1000)
     value_slider.setTickInterval(10)
     value_slider.setValue(refine_value_for_slider(value))
+    sanitized_value = DataElements.input_value
     DataElements.input_value = None
 
     def if_is_not_numeric_include_dot(text: str) -> bool:
@@ -182,7 +183,7 @@ def create_widget_for_float_type(value: Any) -> Tuple[QSlider, QLineEdit]:
 
     value_slider.valueChanged.connect(update_slider)
 
-    value_line_edit = QLineEdit(f"{value}")
+    value_line_edit = QLineEdit(f"{sanitized_value}")
     value_line_edit.editingFinished.connect(lambda: update_line_edit(value_line_edit.text()))
     value_line_edit.returnPressed.connect(lambda: update_line_edit(value_line_edit.text()))
 
@@ -364,6 +365,9 @@ def load_settings_from_table() -> Dict[str, Any]:
 def refine_value_for_slider(value: Any) -> int:
     """Convert a float value to an integer scale used by sliders.
 
+    Invalid or missing numeric values are coerced to ``0.0`` to prevent
+    widget initialization failures when parsing incomplete settings files.
+
     Args:
         value (Any): Float-compatible value to convert.
 
@@ -371,7 +375,11 @@ def refine_value_for_slider(value: Any) -> int:
         int: Slider-compatible integer value in the 0-1000 range.
     """
 
-    DataElements.input_value = float(value)
+    try:
+        DataElements.input_value = float(value)
+    except (TypeError, ValueError):
+        DataElements.input_value = 0.0
+
     slider_value = int(DataElements.input_value * 10)
     slider_value = max(0, min(slider_value, 1000))
     return slider_value

@@ -240,7 +240,7 @@ def save_file(save_path: str) -> None:
 
                 for option, value in DataElements.palworld_options_to_save.items():
                     if value or isinstance(value, bool):
-                        option_type = DataElements.palworld_options_type[option]
+                        option_type = DataElements.palworld_options_type.get(option, "str")
                         match option_type:
                             case "str":
                                 file.write(f"{option}=\"{value}\",")
