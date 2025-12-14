@@ -1,0 +1,457 @@
+{
+  "Difficulty": {
+    "ko": "난이도 프리셋(전용 서버에서는 영향이 제한될 수 있음)",
+    "en": "Difficulty preset (may have limited impact on dedicated servers)",
+    "jp": "難易度プリセット（専用サーバーでは影響が限定的な場合あり）"
+  },
+  "DayTimeSpeedRate": {
+    "ko": "낮 시간 흐름 배율 (값↑ → 낮이 짧아짐)",
+    "en": "Daytime speed multiplier (higher = shorter days)",
+    "jp": "昼の時間経過倍率（値が高いほど昼が短くなる）"
+  },
+  "NightTimeSpeedRate": {
+    "ko": "밤 시간 흐름 배율 (값↑ → 밤이 짧아짐)",
+    "en": "Nighttime speed multiplier (higher = shorter nights)",
+    "jp": "夜の時間経過倍率（値が高いほど夜が短くなる）"
+  },
+  "RandomizerType": {
+    "ko": "랜덤 팔 모드 종류(없음/지역/전체)",
+    "en": "Random Pal mode type (none/area/all)",
+    "jp": "ランダムパルモードの種類（なし/地域/全体）"
+  },
+  "RandomizerSeed": {
+    "ko": "랜덤 팔 시드값 (같은 시드로 결과 재현)",
+    "en": "Random Pal seed value (reproduce results with the same seed)",
+    "jp": "ランダムパルのシード値（同じシードで結果を再現）"
+  },
+  "bIsRandomizerPalLevelRandom": {
+    "ko": "야생 팔 레벨을 완전히 랜덤으로 할지 여부",
+    "en": "Whether to randomize wild Pal levels completely",
+    "jp": "野生パルのレベルを完全にランダムにするかどうか"
+  },
+  "ExpRate": {
+    "ko": "경험치 획득 배율",
+    "en": "Experience gain multiplier",
+    "jp": "経験値獲得倍率"
+  },
+  "PalCaptureRate": {
+    "ko": "팔 포획 보정 배율",
+    "en": "Pal capture adjustment multiplier",
+    "jp": "パル捕獲補正倍率"
+  },
+  "PalSpawnNumRate": {
+    "ko": "야생 팔 출현 배율 (성능 영향)",
+    "en": "Wild Pal spawn multiplier (impacts performance)",
+    "jp": "野生パル出現倍率（パフォーマンスに影響）"
+  },
+  "PalDamageRateAttack": {
+    "ko": "팔이 주는 피해 배율",
+    "en": "Pal damage dealt multiplier",
+    "jp": "パルが与えるダメージ倍率"
+  },
+  "PalDamageRateDefense": {
+    "ko": "팔이 받는 피해 배율",
+    "en": "Pal damage taken multiplier",
+    "jp": "パルが受けるダメージ倍率"
+  },
+  "PlayerDamageRateAttack": {
+    "ko": "플레이어가 주는 피해 배율",
+    "en": "Player damage dealt multiplier",
+    "jp": "プレイヤーが与えるダメージ倍率"
+  },
+  "PlayerDamageRateDefense": {
+    "ko": "플레이어가 받는 피해 배율",
+    "en": "Player damage taken multiplier",
+    "jp": "プレイヤーが受けるダメージ倍率"
+  },
+  "PlayerStomachDecreaceRate": {
+    "ko": "플레이어 허기 감소 속도 배율",
+    "en": "Player hunger decrease rate multiplier",
+    "jp": "プレイヤーの空腹減少速度倍率"
+  },
+  "PlayerStaminaDecreaceRate": {
+    "ko": "플레이어 스태미나 감소 속도 배율",
+    "en": "Player stamina decrease rate multiplier",
+    "jp": "プレイヤーのスタミナ減少速度倍率"
+  },
+  "PlayerAutoHPRegeneRate": {
+    "ko": "플레이어 자동 HP 회복 배율",
+    "en": "Player automatic HP regeneration multiplier",
+    "jp": "プレイヤーの自動HP回復倍率"
+  },
+  "PlayerAutoHpRegeneRateInSleep": {
+    "ko": "수면 중 플레이어 HP 회복 배율",
+    "en": "Player HP regeneration multiplier during sleep",
+    "jp": "睡眠中のプレイヤーHP回復倍率"
+  },
+  "PalStomachDecreaceRate": {
+    "ko": "팔 허기 감소 속도 배율",
+    "en": "Pal hunger decrease rate multiplier",
+    "jp": "パルの空腹減少速度倍率"
+  },
+  "PalStaminaDecreaceRate": {
+    "ko": "팔 스태미나 감소 속도 배율",
+    "en": "Pal stamina decrease rate multiplier",
+    "jp": "パルのスタミナ減少速度倍率"
+  },
+  "PalAutoHPRegeneRate": {
+    "ko": "팔 자동 HP 회복 배율",
+    "en": "Pal automatic HP regeneration multiplier",
+    "jp": "パルの自動HP回復倍率"
+  },
+  "PalAutoHpRegeneRateInSleep": {
+    "ko": "팔박스(수면) 중 HP 회복 배율",
+    "en": "Pal HP regeneration multiplier in Palbox sleep",
+    "jp": "パルボックス（睡眠中）のHP回復倍率"
+  },
+  "WorkSpeedRate": {
+    "ko": "작업/제작 속도 배율",
+    "en": "Work and crafting speed multiplier",
+    "jp": "作業・クラフト速度倍率"
+  },
+  "bEnableAimAssistPad": {
+    "ko": "패드 에임 어시스트 사용 여부",
+    "en": "Enable aim assist for controllers",
+    "jp": "コントローラーのエイムアシスト有効化"
+  },
+  "bEnableAimAssistKeyboard": {
+    "ko": "키보드/마우스 에임 어시스트 사용 여부",
+    "en": "Enable aim assist for keyboard/mouse",
+    "jp": "キーボード/マウスのエイムアシスト有効化"
+  },
+  "BuildObjectHpRate": {
+    "ko": "구조물 HP 배율",
+    "en": "Structure HP multiplier",
+    "jp": "建築物HP倍率"
+  },
+  "BuildObjectDamageRate": {
+    "ko": "구조물이 받는 피해 배율",
+    "en": "Structure damage taken multiplier",
+    "jp": "建築物の被ダメージ倍率"
+  },
+  "BuildObjectDeteriorationDamageRate": {
+    "ko": "구조물 열화/부식 피해 배율",
+    "en": "Structure deterioration damage multiplier",
+    "jp": "建築物の劣化ダメージ倍率"
+  },
+  "CollectionDropRate": {
+    "ko": "채집 드랍 배율",
+    "en": "Gathering drop multiplier",
+    "jp": "採集ドロップ倍率"
+  },
+  "CollectionObjectHpRate": {
+    "ko": "채집 대상 HP 배율",
+    "en": "Gatherable object HP multiplier",
+    "jp": "採集対象HP倍率"
+  },
+  "CollectionObjectRespawnSpeedRate": {
+    "ko": "채집 리스폰 간격 배율 (값↓ → 더 자주)",
+    "en": "Gatherable respawn interval multiplier (lower = faster respawn)",
+    "jp": "採集オブジェクトのリスポーン間隔倍率（低いほど早い）"
+  },
+  "EnemyDropItemRate": {
+    "ko": "적/팔 처치 드랍 배율",
+    "en": "Enemy and Pal drop rate multiplier",
+    "jp": "敵/パル討伐時のドロップ倍率"
+  },
+  "DropItemMaxNum": {
+    "ko": "월드 바닥 드랍 아이템 최대치",
+    "en": "Maximum dropped items on the ground",
+    "jp": "ワールドに存在できる落下アイテム上限"
+  },
+  "DropItemAliveMaxHours": {
+    "ko": "바닥 아이템 유지 시간(시간)",
+    "en": "Time dropped items persist (hours)",
+    "jp": "落下アイテムの維持時間（時間）"
+  },
+  "EquipmentDurabilityDamageRate": {
+    "ko": "장비 내구도 소모 배율",
+    "en": "Equipment durability loss multiplier",
+    "jp": "装備の耐久消費倍率"
+  },
+  "ItemWeightRate": {
+    "ko": "아이템 무게 배율",
+    "en": "Item weight multiplier",
+    "jp": "アイテム重量倍率"
+  },
+  "ItemContainerForceMarkDirtyInterval": {
+    "ko": "컨테이너 강제 동기화 간격(초)",
+    "en": "Container force-sync interval (seconds)",
+    "jp": "コンテナ強制同期間隔（秒）"
+  },
+  "ItemCorruptionMultiplier": {
+    "ko": "음식 부패/타이머 배율(버전별 동작 상이)",
+    "en": "Food spoilage/timer multiplier (may vary by version)",
+    "jp": "食品の腐敗/タイマー倍率（バージョンによって挙動が異なる場合あり）"
+  },
+  "MaxBuildingLimitNum": {
+    "ko": "플레이어당 건축 제한 수(0=무제한)",
+    "en": "Building limit per player (0 = unlimited)",
+    "jp": "プレイヤーごとの建築制限数（0で無制限）"
+  },
+  "bBuildAreaLimit": {
+    "ko": "특정 구조물 주변 건축 제한 여부",
+    "en": "Restrict building near certain structures",
+    "jp": "特定建物周辺での建築制限の有無"
+  },
+  "SupplyDropSpan": {
+    "ko": "보급 드랍 주기(분)",
+    "en": "Supply drop interval (minutes)",
+    "jp": "補給ドロップの間隔（分）"
+  },
+  "EnablePredatorBossPal": {
+    "ko": "포식자/보스 팔 활성화 여부",
+    "en": "Enable predator/boss Pal events",
+    "jp": "捕食者/ボスパルを有効化するか"
+  },
+  "bActiveUNKO": {
+    "ko": "UNKO 관련 기능 활성화(버전별 의미 상이)",
+    "en": "Activate UNKO-related features (behavior may vary by version)",
+    "jp": "UNKO関連機能を有効化（バージョンで意味が変わる場合あり）"
+  },
+  "DropItemMaxNum_UNKO": {
+    "ko": "UNKO 드랍 최대치",
+    "en": "Maximum UNKO drops",
+    "jp": "UNKOドロップ上限"
+  },
+  "DeathPenalty": {
+    "ko": "사망 시 드롭 규칙",
+    "en": "Drop rules on death",
+    "jp": "死亡時のドロップルール"
+  },
+  "bIsPvP": {
+    "ko": "PvP 모드 사용 여부",
+    "en": "Enable player versus player (PvP) mode",
+    "jp": "PvPモードを有効にするか"
+  },
+  "bEnablePlayerToPlayerDamage": {
+    "ko": "플레이어 간 피해 허용",
+    "en": "Allow player-to-player damage",
+    "jp": "プレイヤー間ダメージを許可"
+  },
+  "bEnableFriendlyFire": {
+    "ko": "아군 피해 허용",
+    "en": "Allow friendly fire",
+    "jp": "味方への攻撃を許可"
+  },
+  "bHardcore": {
+    "ko": "하드코어 모드(부활 불가 방향)",
+    "en": "Hardcore mode (no standard respawn)",
+    "jp": "ハードコアモード（通常の復活なし）"
+  },
+  "bPalLost": {
+    "ko": "사망 시 팔 영구 손실 여부",
+    "en": "Lose Pal permanently on death",
+    "jp": "死亡時にパルを永久喪失するか"
+  },
+  "bCharacterRecreateInHardcore": {
+    "ko": "하드코어 사망 후 캐릭터 재생성 허용",
+    "en": "Allow character recreation after hardcore death",
+    "jp": "ハードコア死亡後のキャラクター再作成を許可"
+  },
+  "BaseCampMaxNum": {
+    "ko": "기지 최대 수(서버 전체)",
+    "en": "Maximum number of base camps on the server",
+    "jp": "サーバー全体の拠点上限数"
+  },
+  "BaseCampMaxNumInGuild": {
+    "ko": "길드당 기지 최대 수",
+    "en": "Maximum base camps per guild",
+    "jp": "ギルドごとの拠点上限数"
+  },
+  "BaseCampWorkerMaxNum": {
+    "ko": "기지당 작업 팔 최대 수(버전별 적용 차이 가능)",
+    "en": "Maximum working Pals per base (may be overridden by save)",
+    "jp": "拠点ごとの作業パル上限（セーブで上書きされる場合あり）"
+  },
+  "GuildPlayerMaxNum": {
+    "ko": "길드 최대 인원",
+    "en": "Maximum guild members",
+    "jp": "ギルドの最大人数"
+  },
+  "bAutoResetGuildNoOnlinePlayers": {
+    "ko": "온라인 인원 0일 때 길드 자동 리셋 여부",
+    "en": "Auto-reset guild when no members are online",
+    "jp": "オンラインメンバーがいないギルドを自動リセットするか"
+  },
+  "AutoResetGuildTimeNoOnlinePlayers": {
+    "ko": "온라인 0 상태 지속 시 리셋까지 시간(시간)",
+    "en": "Time with zero online members before reset (hours)",
+    "jp": "オンライン0状態が続いたときのリセットまでの時間（時間）"
+  },
+  "bCanPickupOtherGuildDeathPenaltyDrop": {
+    "ko": "다른 길드 사망 드랍 줍기 허용",
+    "en": "Allow pickup of death drops from other guilds",
+    "jp": "他ギルドの死亡ドロップを拾うことを許可"
+  },
+  "bEnableDefenseOtherGuildPlayer": {
+    "ko": "다른 길드 플레이어에 대한 방어 동작 허용",
+    "en": "Enable defense behavior against other guild players",
+    "jp": "他ギルドプレイヤーへの防衛行動を有効化"
+  },
+  "bInvisibleOtherGuildBaseCampAreaFX": {
+    "ko": "타 길드 기지 영역 효과 숨김 여부",
+    "en": "Hide other guilds' base area effects",
+    "jp": "他ギルド拠点エリアのエフェクトを非表示にするか"
+  },
+  "bEnableInvaderEnemy": {
+    "ko": "침공(레이드) 이벤트 활성화",
+    "en": "Enable invasion (raid) events",
+    "jp": "侵攻（レイド）イベントを有効化"
+  },
+  "PalEggDefaultHatchingTime": {
+    "ko": "거대 알 기본 부화 시간(시간)",
+    "en": "Default giant egg hatching time (hours)",
+    "jp": "巨大卵の基本孵化時間（時間）"
+  },
+  "CoopPlayerMaxNum": {
+    "ko": "세션 내 최대 협동 플레이어 수",
+    "en": "Maximum co-op players in a session",
+    "jp": "セッション内の最大協力プレイヤー数"
+  },
+  "ServerPlayerMaxNum": {
+    "ko": "서버 최대 동접 인원",
+    "en": "Maximum concurrent players on the server",
+    "jp": "サーバーの最大同時接続人数"
+  },
+  "ServerName": {
+    "ko": "서버 이름",
+    "en": "Server name",
+    "jp": "サーバー名"
+  },
+  "ServerDescription": {
+    "ko": "서버 설명",
+    "en": "Server description",
+    "jp": "サーバー説明"
+  },
+  "AdminPassword": {
+    "ko": "관리자 비밀번호",
+    "en": "Administrator password",
+    "jp": "管理者パスワード"
+  },
+  "ServerPassword": {
+    "ko": "접속 비밀번호",
+    "en": "Server password",
+    "jp": "接続パスワード"
+  },
+  "PublicPort": {
+    "ko": "커뮤니티 서버 표기용 외부 포트(-port와 별개)",
+    "en": "External port for server listing (separate from -port listen)",
+    "jp": "サーバー一覧用の外部ポート（-portのリッスンとは別）"
+  },
+  "PublicIP": {
+    "ko": "커뮤니티 서버 표기용 외부 IP",
+    "en": "External IP for server listing",
+    "jp": "サーバー一覧用の外部IP"
+  },
+  "RCONEnabled": {
+    "ko": "RCON 원격 콘솔 사용 여부",
+    "en": "Enable RCON remote console",
+    "jp": "RCONリモートコンソールを有効化"
+  },
+  "RCONPort": {
+    "ko": "RCON 포트",
+    "en": "RCON port",
+    "jp": "RCONポート"
+  },
+  "RESTAPIEnabled": {
+    "ko": "REST API 사용 여부",
+    "en": "Enable REST API",
+    "jp": "REST APIを有効化"
+  },
+  "RESTAPIPort": {
+    "ko": "REST API 포트",
+    "en": "REST API port",
+    "jp": "REST APIのポート"
+  },
+  "Region": {
+    "ko": "서버 지역 표기",
+    "en": "Region label for the server",
+    "jp": "サーバーの地域表示"
+  },
+  "bUseAuth": {
+    "ko": "인증 사용 여부",
+    "en": "Use authentication",
+    "jp": "認証を使用するか"
+  },
+  "BanListURL": {
+    "ko": "밴 리스트 URL",
+    "en": "Ban list URL",
+    "jp": "BANリストURL"
+  },
+  "bShowPlayerList": {
+    "ko": "게임 내 플레이어 리스트 표시 여부",
+    "en": "Show player list in game",
+    "jp": "ゲーム内のプレイヤー一覧表示の有無"
+  },
+  "ChatPostLimitPerMinute": {
+    "ko": "분당 채팅 전송 제한",
+    "en": "Chat messages allowed per minute",
+    "jp": "1分あたりのチャット送信制限"
+  },
+  "CrossplayPlatforms": {
+    "ko": "접속 허용 플랫폼 목록",
+    "en": "Allowed platforms for crossplay",
+    "jp": "クロスプレイで許可するプラットフォーム一覧"
+  },
+  "LogFormatType": {
+    "ko": "로그 형식(Text/Json)",
+    "en": "Log format (Text/Json)",
+    "jp": "ログ形式（Text/Json）"
+  },
+  "bIsShowJoinLeftMessage": {
+    "ko": "입장/퇴장 메시지 표시",
+    "en": "Show join/leave messages",
+    "jp": "参加/離脱メッセージを表示"
+  },
+  "ServerReplicatePawnCullDistance": {
+    "ko": "팔 동기화 거리(cm)",
+    "en": "Pal replication cull distance (cm)",
+    "jp": "パルの同期距離（cm）"
+  },
+  "bIsUseBackupSaveData": {
+    "ko": "백업 저장 사용 여부",
+    "en": "Use backup save data",
+    "jp": "バックアップセーブデータを使用するか"
+  },
+  "AutoSaveSpan": {
+    "ko": "자동 저장 간격 값",
+    "en": "Autosave interval value",
+    "jp": "自動セーブ間隔の値"
+  },
+  "bIsMultiplay": {
+    "ko": "멀티플레이 토글",
+    "en": "Multiplay toggle",
+    "jp": "マルチプレイ設定"
+  },
+  "bEnableFastTravel": {
+    "ko": "패스트 트래블 허용",
+    "en": "Enable fast travel",
+    "jp": "ファストトラベルを有効化"
+  },
+  "bIsStartLocationSelectByMap": {
+    "ko": "지도에서 시작/부활 위치 선택 허용",
+    "en": "Allow choosing start/respawn point on map",
+    "jp": "マップから開始/復活地点を選択可能にする"
+  },
+  "bExistPlayerAfterLogout": {
+    "ko": "로그아웃 후 플레이어 잔존 여부",
+    "en": "Keep player character in world after logout",
+    "jp": "ログアウト後もプレイヤーをワールドに残すか"
+  },
+  "bAllowGlobalPalboxExport": {
+    "ko": "글로벌 팔박스 내보내기 허용",
+    "en": "Allow global Palbox export",
+    "jp": "グローバルパルボックスのエクスポートを許可"
+  },
+  "bAllowGlobalPalboxImport": {
+    "ko": "글로벌 팔박스 가져오기 허용",
+    "en": "Allow global Palbox import",
+    "jp": "グローバルパルボックスのインポートを許可"
+  },
+  "bEnableNonLoginPenalty": {
+    "ko": "비로그인 패널티 활성화",
+    "en": "Enable non-login penalty",
+    "jp": "非ログインペナルティを有効化"
+  }
+}

@@ -1,7 +1,7 @@
 # python-palworld-editer
 
-![Version](https://img.shields.io/badge/Version-1.0.3-green)
-![Update](https://img.shields.io/badge/Update-2024.01.28-blue)
+![Version](https://img.shields.io/badge/Version-1.1.0-green)
+![Update](https://img.shields.io/badge/Update-2025.12.14-blue)
 [![CodeFactor](https://www.codefactor.io/repository/github/pepsizerosugar/python-palworld-editer/badge)](https://www.codefactor.io/repository/github/pepsizerosugar/python-palworld-editer)
 ![GitHub all releases](https://img.shields.io/github/downloads/pepsizerosugar/python-palworld-editer/total?color=orange)
 
@@ -17,6 +17,11 @@
 <br><br>
 
 ## 0. Change Log
+
+### version 1.1.0 (2025.12.14)
+
+* Added recently exposed Palworld settings keys (REST API, crossplay platform filter, log format, backup/autosave, randomizer options, etc.) and refreshed the sample `PalWorldSettings.ini` defaults.
+* Updated the multilingual descriptions (ko/en/jp) to match the latest server option guidance, including notes about listing-only ports and backup behavior.
 
 ### version 1.0.3 (2024.01.31)
 
@@ -82,12 +87,12 @@
 
 ### 2-1. Translation
 
-* If you want to translate the program into another language, you can translate it by editing the translation file.
-* The translation file is located in the "resource/config/translation" folder and the file name is "translations.xlsx".
-* If you add a new language, you must add a new column with translation code in the first row (like "en", "ko", "jp").
-* After that you can translate the description by editing the second row.
-* End of the translation, program will automatically load the translation file.
-    * <img src="resources/img/demo/xlsx.png">
+* Translations are now stored as a plain JSON file for easier version control.
+* Location: `resources/config/translation/translations.json`
+* To add a new language:
+    * Add the language code (for example `en`, `ko`, `jp`) to each option entry in the JSON file.
+    * Make sure every option has the same set of language keys so the drop-down shows the language correctly.
+* The editor automatically reloads this JSON file on launch; no spreadsheet tooling is required.
 
 ### 2-2. Reference
 

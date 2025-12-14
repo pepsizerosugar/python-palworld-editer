@@ -1,71 +1,76 @@
 {
-  "PlayerRelated": {
+  "DifficultyTimeRandom": {
+    "Difficulty": "str",
+    "DayTimeSpeedRate": "float",
+    "NightTimeSpeedRate": "float",
+    "RandomizerType": "str",
+    "RandomizerSeed": "str",
+    "bIsRandomizerPalLevelRandom": "bool"
+  },
+  "ProgressCombatStatus": {
+    "ExpRate": "float",
+    "PalCaptureRate": "float",
+    "PalSpawnNumRate": "float",
+    "PalDamageRateAttack": "float",
+    "PalDamageRateDefense": "float",
     "PlayerDamageRateAttack": "float",
     "PlayerDamageRateDefense": "float",
     "PlayerStomachDecreaceRate": "float",
     "PlayerStaminaDecreaceRate": "float",
     "PlayerAutoHPRegeneRate": "float",
     "PlayerAutoHpRegeneRateInSleep": "float",
-    "bEnablePlayerToPlayerDamage": "bool",
-    "bEnableFriendlyFire": "bool",
-    "bEnableDefenseOtherGuildPlayer": "bool",
-    "bEnableNonLoginPenalty": "bool"
-  },
-  "PalRelated": {
-    "PalCaptureRate": "float",
-    "PalSpawnNumRate": "float",
-    "PalDamageRateAttack": "float",
-    "PalDamageRateDefense": "float",
     "PalStomachDecreaceRate": "float",
     "PalStaminaDecreaceRate": "float",
     "PalAutoHPRegeneRate": "float",
     "PalAutoHpRegeneRateInSleep": "float",
-    "PalEggDefaultHatchingTime": "int"
+    "WorkSpeedRate": "float",
+    "bEnableAimAssistPad": "bool",
+    "bEnableAimAssistKeyboard": "bool"
   },
-  "GameDifficultyExperience": {
-    "Difficulty": "str",
-    "ExpRate": "float",
-    "DeathPenalty": "str"
-  },
-  "TimeRelated": {
-    "DayTimeSpeedRate": "float",
-    "NightTimeSpeedRate": "float"
-  },
-  "ConstructionObjectRelated": {
+  "BuildCollectDrops": {
+    "BuildObjectHpRate": "float",
     "BuildObjectDamageRate": "float",
     "BuildObjectDeteriorationDamageRate": "float",
-    "BaseCampMaxNum": "int",
-    "BaseCampWorkerMaxNum": "int",
-    "DropItemMaxNum": "int",
-    "DropItemMaxNum_UNKO": "int",
-    "DropItemAliveMaxHours": "int",
     "CollectionDropRate": "float",
     "CollectionObjectHpRate": "float",
-    "CollectionObjectRespawnSpeedRate": "float"
-  },
-  "CombatRelated": {
+    "CollectionObjectRespawnSpeedRate": "float",
     "EnemyDropItemRate": "float",
-    "bEnableInvaderEnemy": "bool"
+    "DropItemMaxNum": "int",
+    "DropItemMaxNum_UNKO": "int",
+    "DropItemAliveMaxHours": "float",
+    "EquipmentDurabilityDamageRate": "float",
+    "ItemWeightRate": "float",
+    "ItemContainerForceMarkDirtyInterval": "float",
+    "ItemCorruptionMultiplier": "float",
+    "MaxBuildingLimitNum": "int",
+    "bBuildAreaLimit": "bool",
+    "SupplyDropSpan": "int",
+    "EnablePredatorBossPal": "bool",
+    "bActiveUNKO": "bool"
   },
-  "GuildRelated": {
+  "DeathPvPRules": {
+    "DeathPenalty": "str",
+    "bIsPvP": "bool",
+    "bEnablePlayerToPlayerDamage": "bool",
+    "bEnableFriendlyFire": "bool",
+    "bHardcore": "bool",
+    "bPalLost": "bool",
+    "bCharacterRecreateInHardcore": "bool"
+  },
+  "BaseGuild": {
+    "BaseCampMaxNum": "int",
+    "BaseCampMaxNumInGuild": "int",
+    "BaseCampWorkerMaxNum": "int",
     "GuildPlayerMaxNum": "int",
     "bAutoResetGuildNoOnlinePlayers": "bool",
-    "AutoResetGuildTimeNoOnlinePlayers": "bool"
-  },
-  "MiscellaneousSettings": {
-    "bActiveUNKO": "bool",
-    "bEnableAimAssistPad": "bool",
-    "bEnableAimAssistKeyboard": "bool",
-    "bIsMultiplay": "bool",
-    "bIsPvP": "bool",
+    "AutoResetGuildTimeNoOnlinePlayers": "float",
     "bCanPickupOtherGuildDeathPenaltyDrop": "bool",
-    "bEnableFastTravel": "bool",
-    "bIsStartLocationSelectByMap": "bool",
-    "bExistPlayerAfterLogout": "bool",
-    "bUseAuth": "bool",
-    "BanListURL": "str"
+    "bEnableDefenseOtherGuildPlayer": "bool",
+    "bInvisibleOtherGuildBaseCampAreaFX": "bool",
+    "bEnableInvaderEnemy": "bool",
+    "PalEggDefaultHatchingTime": "float"
   },
-  "ServerConnectionRelated": {
+  "ServerNetwork": {
     "CoopPlayerMaxNum": "int",
     "ServerPlayerMaxNum": "int",
     "ServerName": "str",
@@ -74,8 +79,29 @@
     "ServerPassword": "str",
     "PublicPort": "int",
     "PublicIP": "str",
-    "RCONEnabled": "",
+    "RCONEnabled": "bool",
     "RCONPort": "int",
-    "Region": "str"
+    "RESTAPIEnabled": "bool",
+    "RESTAPIPort": "int",
+    "Region": "str",
+    "bUseAuth": "bool",
+    "BanListURL": "str",
+    "bShowPlayerList": "bool",
+    "ChatPostLimitPerMinute": "int",
+    "CrossplayPlatforms": "str",
+    "LogFormatType": "str",
+    "bIsShowJoinLeftMessage": "bool"
+  },
+  "PerformanceBackup": {
+    "ServerReplicatePawnCullDistance": "float",
+    "bIsUseBackupSaveData": "bool",
+    "AutoSaveSpan": "float",
+    "bIsMultiplay": "bool",
+    "bEnableFastTravel": "bool",
+    "bIsStartLocationSelectByMap": "bool",
+    "bExistPlayerAfterLogout": "bool",
+    "bAllowGlobalPalboxExport": "bool",
+    "bAllowGlobalPalboxImport": "bool",
+    "bEnableNonLoginPenalty": "bool"
   }
 }

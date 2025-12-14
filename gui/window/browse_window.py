@@ -1,4 +1,6 @@
-from PyQt5.QtWidgets import QLabel, QComboBox, QPushButton, QVBoxLayout, QHBoxLayout, QWidget
+"""UI for selecting language and loading Palworld settings files."""
+
+from PyQt5.QtWidgets import QComboBox, QHBoxLayout, QLabel, QPushButton, QVBoxLayout, QWidget
 
 from gui.dataclass.data_elements import DataElements
 from gui.dataclass.ui_elements import UIElements
@@ -7,17 +9,22 @@ from utils.translation_utils import change_translation_code
 
 
 class BrowseWindow:
-    def __init__(self):
+    """Landing window that lets users pick a translation and load files."""
+
+    def __init__(self) -> None:
+        """Build controls for language selection and file loading."""
+
         UIElements.browse_translation_label = QLabel()
         UIElements.browse_translation_label.setText("Translation code")
 
         UIElements.browse_translation_combo = QComboBox()
         UIElements.browse_translation_combo.addItems(DataElements.translation_code_list)
         UIElements.browse_translation_combo.currentIndexChanged.connect(
-            lambda index: change_translation_code(index))
+            lambda index: change_translation_code(index)
+        )
 
         UIElements.browse_load_file_button = QPushButton()
-        UIElements.browse_load_file_button.setText('Load Settings File')
+        UIElements.browse_load_file_button.setText("Load Settings File")
         UIElements.browse_load_file_button.clicked.connect(lambda: load_settings_file(UIElements.browse_window))
 
         UIElements.browse_interaction_layout = QVBoxLayout()
